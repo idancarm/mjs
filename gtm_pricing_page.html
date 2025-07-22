@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Automation Pricing - Envy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fff;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            color: white;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .pricing-section {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card.featured {
+            border-color: #FF6B35;
+            transform: scale(1.05);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #FF6B35;
+            color: white;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .plan-description {
+            color: #64748b;
+            margin-bottom: 24px;
+        }
+        
+        .price {
+            margin-bottom: 24px;
+        }
+        
+        .price-monthly {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        
+        .price-annual {
+            font-size: 1.125rem;
+            color: #FF6B35;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+        
+        .setup-fee {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-top: 8px;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+        
+        .features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        
+        .cta-button {
+            width: 100%;
+            padding: 16px 24px;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: #e55a2e;
+        }
+        
+        .differentiation-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 2px solid transparent;
+        }
+        
+        .comparison-card.envy {
+            border-color: #FF6B35;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            color: white;
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .comparison-card.envy h3 {
+            color: white;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .comparison-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .comparison-card.envy .comparison-list li {
+            border-bottom-color: rgba(255,255,255,0.2);
+        }
+        
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .microservice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .microservice-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #FF6B35;
+        }
+        
+        .microservice-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+        
+        .microservice-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        .support-section {
+            padding: 60px 0;
+            background: #f8fafc;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .support-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .support-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FF6B35;
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+            
+            .container {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="container">
+            <div class="logo">ENVY</div>
+            <div class="hero-badge">RevOps-Engineered Automation by Envy</div>
+            <h1>GTM Automation That Actually Works</h1>
+            <p>Unlike generic tools like Dripify or LaGrowthMachine, our microservices are crafted by RevOps experts who understand your entire GTM engine. Get 90% pre-built automation with tailored customization that fits your unique business.</p>
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your GTM Package</h2>
+                <p>RevOps-engineered microservices that adapt to your business, not the other way around</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Single</div>
+                    <div class="plan-description">Perfect for focused LinkedIn outreach</div>
+                    <div class="price">
+                        <div class="price-monthly">$50<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
+                        <div class="price-annual">$37.50/mo (billed annually)</div>
+                        <div class="setup-fee">+ $95 one-time setup</div>
+                    </div>
+                    <ul class="features">
+                        <li>1 RevOps-engineered microservice</li>
+                        <li>500 credits/month</li>
+                        <li>Custom business configuration</li>
+                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>Basic support included</li>
+                    </ul>
+                    <button class="cta-button">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Duet</div>
+                    <div class="plan-description">Complete LinkedIn connection & messaging</div>
+                    <div class="price">
+                        <div class="price-monthly">$100<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
+                        <div class="price-annual">$75/mo (billed annually)</div>
+                        <div class="setup-fee">+ $95 one-time setup</div>
+                    </div>
+                    <ul class="features">
+                        <li>2 RevOps-engineered microservices</li>
+                        <li>1,200 credits/month</li>
+                        <li>Custom business configuration</li>
+                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>Complete LinkedIn workflow</li>
+                        <li>Basic support included</li>
+                    </ul>
+                    <button class="cta-button">Get Started</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-name">Trio</div>
+                    <div class="plan-description">Full LinkedIn-to-CRM automation pipeline</div>
+                    <div class="price">
+                        <div class="price-monthly">$150<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
+                        <div class="price-annual">$112.50/mo (billed annually)</div>
+                        <div class="setup-fee">+ $95 one-time setup</div>
+                    </div>
+                    <ul class="features">
+                        <li>3 RevOps-engineered microservices</li>
+                        <li>2,000 credits/month</li>
+                        <li>Custom business configuration</li>
+                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>Complete automation pipeline</li>
+                        <li>Advanced GTM tracking & insights</li>
+                        <li>Basic support included</li>
+                    </ul>
+                    <button class="cta-button">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="differentiation-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Envy's Hybrid Approach Wins</h2>
+                <p>Unlike one-size-fits-all tools, we combine RevOps expertise with customized automation</p>
+            </div>
+            
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h3>Generic GTM Tools</h3>
+                    <p style="color: #64748b; margin-bottom: 20px;">Dripify, LaGrowthMachine, Expandi</p>
+                    <ul class="comparison-list">
+                        <li>❌ Rigid templates</li>
+                        <li>❌ Basic CRM integration</li>
+                        <li>❌ No GTM strategy expertise</li>
+                        <li>❌ Limited customization</li>
+                        <li>❌ Generic messaging</li>
+                        <li>❌ Poor data hygiene</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card envy">
+                    <h3>Envy's RevOps-Engineered Solution</h3>
+                    <p style="opacity: 0.9; margin-bottom: 20px;">90% Pre-built + Custom Configuration</p>
+                    <ul class="comparison-list">
+                        <li>✅ Tailored to your GTM strategy</li>
+                        <li>✅ Deep HubSpot native integration</li>
+                        <li>✅ RevOps expertise built-in</li>
+                        <li>✅ Custom business logic</li>
+                        <li>✅ Personalized messaging workflows</li>
+                        <li>✅ Clean data architecture</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card">
+                    <h3>Custom Development</h3>
+                    <p style="color: #64748b; margin-bottom: 20px;">Build from scratch</p>
+                    <ul class="comparison-list">
+                        <li>❌ 6+ month timeline</li>
+                        <li>❌ $50k+ investment</li>
+                        <li>❌ Technical debt risk</li>
+                        <li>❌ Ongoing maintenance cost</li>
+                        <li>❌ No GTM best practices</li>
+                        <li>❌ Single point of failure</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="microservices-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>RevOps-Engineered Microservices</h2>
+                <p>Each microservice leverages deep GTM expertise to solve specific jobs-to-be-done</p>
+            </div>
+            
+            <div class="microservice-grid">
+                <div class="microservice-card">
+                    <h3>ICP Persona Outreach for Connection</h3>
+                    <p>Automatically search LinkedIn for prospects matching your ICP criteria and send personalized connection requests to maximize acceptance rates.</p>
+                </div>
+                
+                <div class="microservice-card">
+                    <h3>Connected ICP Persona Message Sequences</h3>
+                    <p>Execute tailored message sequences to newly connected prospects with smart follow-up automation that adapts based on engagement.</p>
+                </div>
+                
+                <div class="microservice-card">
+                    <h3>ICP Persona Signal Transmission to CRM</h3>
+                    <p>Monitor prospect responses and engagement signals, automatically syncing qualified leads and conversation data to your HubSpot CRM.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Support Options</h2>
+                <p>Choose the level of support that fits your team's needs</p>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-card">
+                    <h3>Basic Support</h3>
+                    <div class="support-price">Included</div>
+                    <ul class="features">
+                        <li>Email support</li>
+                        <li>Documentation access</li>
+                        <li>Setup assistance</li>
+                        <li>Response within 24 hours</li>
+                    </ul>
+                </div>
+                
+                <div class="support-card">
+                    <h3>Premium Support</h3>
+                    <div class="support-price">+$50<span style="font-size: 1rem;">/mo</span></div>
+                    <ul class="features">
+                        <li>Dedicated Slack channel</li>
+                        <li>Priority ticketing system</li>
+                        <li>Same-day response</li>
+                        <li>Custom configuration help</li>
+                        <li>Monthly strategy calls</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
