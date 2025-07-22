@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The LinkedIn Opportunity Engine | GoEnvy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles using the official GoEnvy Brand Palette */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Official Black */
+            color: #EDEDED; /* Official Light Gray for body text */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #FFFFFF; /* Official White for headlines */
+        }
+        /* Main Accent Color */
+        .brand-green {
+            color: #14DF99;
+        }
+        .bg-brand-green {
+            background-color: #14DF99;
+        }
+        .bg-brand-green:hover {
+            background-color: #2AFDD4; /* Lighter version for hover */
+        }
+        .border-brand-green {
+            border-color: #14DF99;
+        }
+        
+        /* Secondary Accent Colors for Icons */
+        .text-brand-lime { color: #D6FE51; }
+        .text-brand-turquoise { color: #44EAD4; }
+        .text-brand-pink { color: #FF1F6C; }
+
+        /* Structural Colors */
+        .bg-secondary {
+            background-color: #1A1A1A; /* Dark gray for cards to create depth */
+        }
+        .border-subtle {
+            border-color: #333333; /* Subtle gray border */
+        }
+
+        /* Animation specific styles */
+        .animation-step {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+        .animation-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animation-arrow {
+            opacity: 0;
+            transition: opacity 0.8s ease-in 0.5s; /* Delay arrow appearance */
+        }
+        .animation-arrow.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="p-4 sm:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+             <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
+             <nav>
+                 <a href="#" class="text-sm font-medium hover:text-white transition-colors">Back to Agency Site</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 sm:py-16">
+
+        <!-- Section 1: Hero -->
+        <section class="text-center max-w-4xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Find Your Next Customer in <span class="brand-green">Today's LinkedIn Feed.</span></h1>
+            <p class="text-lg sm:text-xl text-gray-300 mb-8">We monitor the posts of your key accounts and prospects, analyze their intent in real-time, and draft the perfect outreach for your approval the moment a buying signal is detected.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="bg-brand-green text-black font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105">Start Listening for My Buyers</a>
+                <a href="#" class="bg-secondary text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-800 transition-all">See a Live Demo</a>
+            </div>
+        </section>
+
+        <!-- Section 2: The Problem (JTBD) -->
+        <section class="py-16 sm:py-24 max-w-4xl mx-auto">
+            <div class="text-center">
+                 <div class="mx-auto mb-4 h-12 w-12 flex items-center justify-center bg-secondary rounded-full">
+                    <!-- Icon: Clock with a spinning arrow -->
+                    <svg class="h-6 w-6 text-brand-pink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                 </div>
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">You're Relying on Luck, Not a Strategy.</h2>
+                <p class="text-gray-300 text-lg">Your sales team manually scrolling through feeds is a game of chance. By the time they see a relevant post, the window of opportunity has closed. We believe in systematically 'listening' to your prospects and automatically triggering a personalized engagement based on their own words, in near real-time.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: The Solution (The Animated Mockup) -->
+        <section class="py-16 sm:py-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Engine Turns Their Words into Your Pipeline.</h2>
+                <p class="text-gray-300 text-lg">This is how it works, from signal detection to your approved outreach.</p>
+            </div>
+            <div id="animation-container" class="space-y-8 md:space-y-0 md:flex md:items-center md:justify-center md:space-x-4">
+                <!-- Step 1: Monitor -->
+                <div id="step-1" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-turquoise" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M9 6h6m-6 12h6"/></svg>
+                    <h3 class="font-bold mb-1">Monitor & Capture</h3>
+                    <p class="text-sm text-gray-400">Monitoring posts from your target accounts.</p>
+                </div>
+                <div id="arrow-1" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <!-- Step 2: Analyze -->
+                <div id="step-2" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-lime" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    <h3 class="font-bold mb-1">AI-Powered Analysis</h3>
+                    <p class="text-sm text-gray-400">Analyzing for sentiment, keywords, and brands.</p>
+                </div>
+                <div id="arrow-2" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <!-- Step 3: Triage -->
+                <div id="step-3" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                     <svg class="h-8 w-8 mx-auto mb-3 text-brand-pink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="font-bold mb-1">Intelligent Triage</h3>
+                    <p class="text-sm text-gray-400">High-intent signal found!</p>
+                </div>
+                <div id="arrow-3" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <!-- Step 4: Draft & Approve -->
+                <div id="step-4" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                     <svg class="h-8 w-8 mx-auto mb-3 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="font-bold mb-1">Draft & Approve</h3>
+                    <p class="text-sm text-gray-400">Draft sent to your queue for human approval.</p>
+                </div>
+                <div id="arrow-4" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <!-- Step 5: Execute -->
+                <div id="step-5" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-turquoise" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <h3 class="font-bold mb-1">Execute Engagement</h3>
+                    <p class="text-sm text-gray-400">Approved outreach sent and logged in CRM.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Value Proposition -->
+        <section class="py-16 sm:py-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold">The Envy Advantage</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Benefit 1 -->
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Engage on Authentic Intent</h3>
+                            <p class="text-gray-400">Move beyond generic intent data. Act on the actual, public words of your prospects and customers.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Benefit 2 -->
+                <div class="bg-secondary p-8 rounded-lg">
+                     <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Hyper-Personalization at Scale</h3>
+                            <p class="text-gray-400">Our engine drafts the outreach; your team adds the final human touch.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Benefit 3 -->
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Uncover Hidden Opportunities</h3>
+                            <p class="text-gray-400">Find pipeline in accounts that aren't actively searching on Google or G2. Find opportunities your competitors will never see.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Benefit 4 -->
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Brand Safe & Human-Approved</h3>
+                            <p class="text-gray-400">Every single piece of outreach is sent to a dashboard for your review and approval. You have full control.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: The Technology Stack -->
+        <section class="py-16 sm:py-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold">Built with a Modern, Powerful Stack</h2>
+                <p class="text-gray-300 text-lg">We build these engines by expertly integrating best-in-class tools. You get a flexible, powerful solution without being locked into a proprietary black box.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Tech 1: n8n -->
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <img src="https://raw.githubusercontent.com/n8n-io/n8n-docs/master/assets/n8n-logo-square.png" alt="n8n Logo" class="h-16 w-16 mx-auto mb-4 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/64x64/1F2937/F9FAFB?text=n8n';">
+                    <h3 class="text-xl font-bold">n8n</h3>
+                    <p class="font-semibold text-brand-green mb-2">Orchestration</p>
+                    <p class="text-gray-400">We use n8n to build the core workflow, providing robust and customizable automation.</p>
+                </div>
+                <!-- Tech 2: Unipile -->
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <img src="https://www.unipile.com/wp-content/uploads/2023/08/logo-unipile.png" alt="Unipile Logo" class="h-16 w-16 mx-auto mb-4 p-2 bg-white rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/111827?text=Unipile';">
+                    <h3 class="text-xl font-bold">Unipile</h3>
+                    <p class="font-semibold text-brand-green mb-2">Data Retrieval</p>
+                    <p class="text-gray-400">We leverage the Unipile API to reliably access LinkedIn data and perform actions.</p>
+                </div>
+                <!-- Tech 3: HubSpot -->
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                     <img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot Logo" class="h-16 w-16 mx-auto mb-4" onerror="this.onerror=null;this.src='https://placehold.co/64x64/1F2937/F9FAFB?text=HubSpot';">
+                    <h3 class="text-xl font-bold">HubSpot</h3>
+                    <p class="font-semibold text-brand-green mb-2">CRM & Reporting</p>
+                    <p class="text-gray-400">The entire play is rooted in HubSpot for target lists, activity logging, and ROI reporting.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: Final CTA -->
+        <section class="py-16 sm:py-24">
+            <div class="bg-secondary rounded-lg p-8 md:p-16 max-w-5xl mx-auto text-center">
+                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">Ready to Activate Your LinkedIn Pipeline?</h2>
+                 <p class="text-gray-300 text-lg mb-8">Stop missing out on the deals hiding in your social feed. Let's build your Opportunity Engine.</p>
+                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="bg-brand-green text-black font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105">Start Listening for My Buyers</a>
+                    <a href="#" class="bg-gray-800 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-700 transition-all">Book a Signal Discovery Call</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-subtle mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // This script handles the animation for the "Solution" section
+        document.addEventListener('DOMContentLoaded', () => {
+            const animationContainer = document.getElementById('animation-container');
+            const steps = Array.from(animationContainer.querySelectorAll('.animation-step'));
+            const arrows = Array.from(animationContainer.querySelectorAll('.animation-arrow'));
+
+            const allElements = [];
+            steps.forEach((step, index) => {
+                allElements.push(step);
+                if (arrows[index]) {
+                    allElements.push(arrows[index]);
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    // Start the animation sequence when the container is in view
+                    let delay = 0;
+                    allElements.forEach((el) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, delay);
+                        delay += 400; // Stagger the animation for each element
+                    });
+                    // We only want this to run once, so we disconnect the observer
+                    observer.disconnect();
+                }
+            }, {
+                threshold: 0.5 // Trigger when 50% of the container is visible
+            });
+
+            observer.observe(animationContainer);
+        });
+    </script>
+
+</body>
+</html>
