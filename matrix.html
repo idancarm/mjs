@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen GTM Automation Matrix | GoEnvy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles using the official GoEnvy Brand Palette */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Official Black */
+            color: #EDEDED; /* Official Light Gray for body text */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #FFFFFF; /* Official White for headlines */
+        }
+        /* Main Accent Color */
+        .brand-green {
+            color: #14DF99;
+        }
+        .bg-brand-green {
+            background-color: #14DF99;
+        }
+        .bg-brand-green:hover {
+            background-color: #2AFDD4; /* Lighter version for hover */
+        }
+        .border-brand-green {
+            border-color: #14DF99;
+        }
+        
+        /* Secondary Accent Colors for Icons */
+        .text-brand-lime { color: #D6FE51; }
+        .text-brand-turquoise { color: #44EAD4; }
+        .text-brand-pink { color: #FF1F6C; }
+
+        /* Structural Colors */
+        .bg-secondary {
+            background-color: #1A1A1A; /* Dark gray for cards to create depth */
+        }
+        .border-subtle {
+            border-color: #333333; /* Subtle gray border */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.is-active {
+            display: flex; /* Display when active */
+            opacity: 1;
+        }
+        .modal-content {
+            transform: translateY(-30px);
+            transition: transform 0.3s ease;
+        }
+        .modal.is-active .modal-content {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="p-4 sm:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+             <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
+             <nav>
+                 <a href="#" class="text-sm font-medium hover:text-white transition-colors">Back to Agency Site</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 sm:py-16">
+
+        <!-- Section 1: Hero -->
+        <section class="text-center max-w-4xl mx-auto mb-16">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Next-Gen GTM Automation Matrix</h1>
+            <p class="text-lg sm:text-xl text-gray-300">7 Essential Micro-Journeys Mapped to Fundamental SDR/AE Jobs-to-be-Done.</p>
+        </section>
+
+        <!-- Section 2: The Matrix -->
+        <section class="mb-16">
+            <div class="bg-secondary rounded-lg p-4 sm:p-6 overflow-x-auto">
+                <table class="w-full min-w-[800px] border-separate" style="border-spacing: 0;">
+                    <thead>
+                        <tr>
+                            <th class="p-4 text-left text-sm font-bold uppercase tracking-wider">Jobs-to-be-Done</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="instant-lead">Instant Lead<br>Enrichment</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="champion-id">Champion<br>Identification</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="buying-signal">Buying Signal<br>Detection</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider">
+                                <a href="gtm1.html" class="text-brand-lime hover:underline">Post Signal<br>Detection</a>
+                            </th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="smart-connection">Smart Connection<br>Requests</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="prospect-warming">Prospect<br>Warming</th>
+                            <th class="p-4 text-center text-sm font-bold uppercase tracking-wider is-clickable" data-modal-id="event-outreach">Event-Based<br>Outreach</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-[#111111]">
+                        <!-- Rows -->
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="personalize-scale">Personalize outreach at scale</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="prioritize-pipeline">Prioritize my pipeline</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="leverage-network">Leverage my network</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="build-relationships">Build stronger relationships</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="time-outreach">Time my outreach perfectly</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="conversation-starters">Find conversation starters</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="p-4 font-medium border-t border-subtle is-clickable" data-modal-id="scale-outreach">Scale my outreach</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-brand-green font-bold text-xl">✓</td>
+                            <td class="p-4 text-center border-t border-subtle text-gray-600">—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Stats Bar -->
+        <section class="mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto text-center">
+                <div>
+                    <div class="text-5xl font-extrabold brand-green">7</div>
+                    <div class="text-sm uppercase tracking-wider text-gray-400 mt-1">Core JTBDs</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold brand-green">7</div>
+                    <div class="text-sm uppercase tracking-wider text-gray-400 mt-1">Micro-Journeys</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold brand-green">17</div>
+                    <div class="text-sm uppercase tracking-wider text-gray-400 mt-1">Total Connections</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-extrabold brand-green">2.4</div>
+                    <div class="text-sm uppercase tracking-wider text-gray-400 mt-1">Avg JTBDs per Journey</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Insights -->
+        <section>
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold">Strategic Insights</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-secondary p-8 rounded-lg border-l-4 border-brand-lime">
+                    <h3 class="text-xl font-bold mb-4">Most Versatile Solutions</h3>
+                    <p class="text-sm text-gray-400 mb-4">(3 JTBDs each)</p>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Buying Signal Detection</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Post Signal Detection</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Smart Connection Requests</li>
+                    </ul>
+                </div>
+                <div class="bg-secondary p-8 rounded-lg border-l-4 border-brand-turquoise">
+                    <h3 class="text-xl font-bold mb-4">Universal JTBDs</h3>
+                    <p class="text-sm text-gray-400 mb-4">(3+ connections)</p>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Personalize outreach at scale</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Prioritize my pipeline</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Build stronger relationships</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Time my outreach perfectly</li>
+                    </ul>
+                </div>
+                <div class="bg-secondary p-8 rounded-lg border-l-4 border-brand-pink">
+                    <h3 class="text-xl font-bold mb-4">Foundation Pairs</h3>
+                    <p class="text-sm text-gray-400 mb-4">(2 JTBDs each)</p>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Instant Lead Enrichment</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Champion Identification</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Prospect Warming</li>
+                        <li class="flex items-start"><span class="brand-green mr-3">→</span>Event-Based Outreach</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content bg-secondary rounded-lg w-11/12 max-w-2xl shadow-2xl overflow-hidden">
+            <div class="flex justify-between items-center p-6 border-b border-subtle">
+                <h2 id="modal-title" class="text-2xl font-bold"></h2>
+                <button class="modal__close-btn text-gray-400 hover:text-white text-4xl transition-colors">&times;</button>
+            </div>
+            <div class="p-8">
+                <h3 id="modal-subtitle" class="font-semibold text-brand-green mb-4 uppercase tracking-wider text-sm"></h3>
+                <div id="modal-text" class="prose prose-invert text-gray-300 space-y-4"></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="border-t border-subtle mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalText = document.getElementById('modal-text');
+        const closeBtn = document.querySelector('.modal__close-btn');
+        const clickableElements = document.querySelectorAll('.is-clickable');
+
+        // Content Data (Moved to JS for easier management)
+        const modalContent = {
+            // Micro-Journeys
+            'instant-lead': { title: 'Instant Lead Enrichment', subtitle: 'Micro-Journey Automation', text: `<p>This automation transforms manual LinkedIn research into instant, comprehensive data enrichment. When a new contact enters your CRM, this micro-journey pulls rich contextual data from LinkedIn, including company info, job titles, and networks.</p><p>It provides strategic insights like company size, growth indicators, funding news, and mutual connections for personalized outreach. By eliminating manual research, sales reps focus on high-value activities, ensuring complete, actionable data from day one.</p>`},
+            'champion-id': { title: 'Champion Identification', subtitle: 'Micro-Journey Automation', text: `<p>This micro-journey automates network analysis and relationship mapping to identify internal champions. Triggered at the proposal stage, it analyzes LinkedIn networks for mutual connections between your team and key stakeholders.</p><p>It maps relationship strength, identifies warm introduction paths, and suggests individuals based on role and influence. This systematic approach reduces sales cycle times and increases win rates in complex B2B deals.</p>`},
+            'buying-signal': { title: 'Buying Signal Detection', subtitle: 'Micro-Journey Automation', text: `<p>Job changes create high-converting sales opportunities. This micro-journey monitors LinkedIn for job change notifications, identifying expansion and new business potential.</p><p>When a contact changes roles, the system assesses opportunity potential, creates new CRM opportunities, and generates personalized outreach. It ensures you never miss these time-sensitive, high-conversion opportunities.</p>`},
+            'post-signal': { title: 'Post Signal Detection', subtitle: 'Micro-Journey Automation', text: `<p>Social media posts reveal buying intent. This AI-powered micro-journey analyzes LinkedIn posts for topical signals indicating interest or challenges your solution can address.</p><p>Using NLP, it detects keywords and sentiment, flagging high-priority engagement opportunities and suggesting talking points. This provides real-time insights, improving response rates and conversation quality.</p>`},
+            'smart-connection': { title: 'Smart Connection Requests', subtitle: 'Micro-Journey Automation', text: `<p>This micro-journey automatically generates personalized LinkedIn connection requests when deals reach qualified status, using CRM and LinkedIn data.</p><p>It analyzes mutual connections, shared experiences, and company news to craft relevant messages, significantly improving acceptance rates. It manages the entire networking workflow at scale, building high-quality professional networks efficiently.</p>`},
+            'prospect-warming': { title: 'Prospect Warming', subtitle: 'Micro-Journey Automation', text: `<p>This micro-journey systematically warms prospects before direct sales contact. When new leads are assigned, it initiates a sequence of profile views and content engagement to build recognition.</p><p>This process creates familiarity, leading to significantly higher response rates than cold contacts. It systematizes building trust, resulting in more positive initial conversations and faster relationship development.</p>`},
+            'event-outreach': { title: 'Event-Based Outreach', subtitle: 'Micro-Journey Automation', text: `<p>This micro-journey automates identifying event attendees and creating personalized outreach. It flags high-priority prospects and suggests talking points related to shared event experiences.</p><p>This shared context improves response rates and conversation quality. It maximizes ROI from events by ensuring systematic follow-up, converting interactions into meaningful business conversations and deals.</p>`},
+            // Jobs-to-be-Done
+            'personalize-scale': { title: 'Personalize Outreach at Scale', subtitle: 'Core Jobs-to-be-Done', text: `<p>Sales teams need to personalize outreach at scale. Prospects expect relevant communication, but quotas demand high volume. Generic outreach fails; manual personalization doesn't scale.</p><p>Systems must automatically gather and apply contextual info to create personalized messages. AI and data integration enable rapid customization without sacrificing quality, leading to high response rates at high volume.</p>`},
+            'prioritize-pipeline': { title: 'Prioritize My Pipeline', subtitle: 'Core Jobs-to-be-Done', text: `<p>Sales professionals manage many prospects, needing intelligent prioritization. Without it, time is wasted on low-probability leads. This JTBD addresses the need for smart prospect ranking.</p><p>Effective prioritization synthesizes engagement history, buying signals, and timing. Sophisticated systems provide dynamic, real-time recommendations, ensuring efforts focus on high-value opportunities at optimal moments.</p>`},
+            'leverage-network': { title: 'Leverage My Network', subtitle: 'Core Jobs-to-be-Done', text: `<p>Professional networks are valuable assets, often underutilized. This JTBD addresses systematically activating relationships for warm introductions, competitive intel, and decision-maker access.</p><p>Effective leverage maps complex relationship webs, identifying direct and indirect connections. Modern automation analyzes LinkedIn networks at scale, ensuring every interaction benefits from strong relationship foundations.</p>`},
+            'build-relationships': { title: 'Build Stronger Relationships', subtitle: 'Core Jobs-to-be-Done', text: `<p>B2B sales success relies on authentic relationships. This JTBD focuses on developing genuine professional connections that build trust and loyalty for long-term competitive advantages.</p><p>Relationship building at scale requires systematic touchpoint management and personalized engagement. Automation handles maintenance, allowing humans to focus on authentic connection and value creation.</p>`},
+            'time-outreach': { title: 'Time My Outreach Perfectly', subtitle: 'Core Jobs-to-be-Done', text: `<p>Timing is crucial for outreach engagement. This JTBD addresses contacting prospects when they are most receptive, actively evaluating solutions, or experiencing trigger events.</p><p>Perfect timing monitors social media, company news, and engagement patterns. Sophisticated systems combine real-time monitoring with predictive analytics to anticipate optimal contact moments for maximum receptivity.</p>`},
+            'conversation-starters': { title: 'Find Conversation Starters', subtitle: 'Core Jobs-to-be-Done', text: `<p>Breaking through noise requires engaging opening messages. This JTBD focuses on finding relevant, timely hooks to transform cold outreach into warm dialogue.</p><p>Effective starters reference current events, shared connections, or challenges. Automation monitors data sources to identify conversation opportunities, ensuring outreach feels valuable and not intrusive.</p>`},
+            'scale-outreach': { title: 'Scale My Outreach', subtitle: 'Core Jobs-to-be-Done', text: `<p>Modern sales quotas demand contacting hundreds of prospects monthly, overwhelming manual processes. This JTBD addresses increasing outreach volume without sacrificing quality or compliance.</p><p>Scaling effectively automates repetitive tasks while preserving human elements. Intelligent automation handles routines, providing insights and workflows for high-quality human interactions, translating efficiency into revenue growth.</p>`}
+        };
+
+        function openModal(id) {
+            const content = modalContent[id];
+            if (content) {
+                modalTitle.textContent = content.title;
+                modalSubtitle.textContent = content.subtitle;
+                modalText.innerHTML = content.text;
+                modal.classList.add('is-active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        // Event Listeners
+        closeBtn.addEventListener('click', closeModal);
+
+        clickableElements.forEach(element => {
+            element.addEventListener('click', (event) => {
+                const modalId = element.dataset.modalId;
+                if (modalId) {
+                    // Prevent link navigation if it's just a modal trigger
+                    if (element.tagName.toLowerCase() !== 'a') {
+                         event.preventDefault();
+                    }
+                    openModal(modalId);
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
