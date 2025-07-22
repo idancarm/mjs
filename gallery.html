@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-To-Market Micro-Journeys Gallery | GoEnvy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles using the official GoEnvy Brand Palette */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Official Black */
+            color: #EDEDED; /* Official Light Gray for body text */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #FFFFFF; /* Official White for headlines */
+        }
+        .brand-green { color: #14DF99; }
+        .bg-secondary { background-color: #1A1A1A; }
+        .border-subtle { border-color: #333333; }
+
+        /* Card Flip Styles */
+        .mj-card-container {
+            perspective: 1000px;
+        }
+        .mj-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 280px; /* Ensure cards have a consistent height */
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .mj-card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .mj-card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border: 1px solid #333333;
+            border-radius: 0.5rem; /* 8px */
+            display: flex;
+            flex-direction: column;
+        }
+        .mj-card-front {
+            background-color: #1A1A1A;
+        }
+        .mj-card-back {
+            background-color: #1A1A1A;
+            transform: rotateY(180deg);
+            padding: 1.5rem; /* p-6 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="p-4 sm:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+             <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
+             <nav>
+                 <a href="index.html" class="text-sm font-medium hover:text-white transition-colors">← Back to Home</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 sm:py-16">
+
+        <!-- Section 1: Hero -->
+        <section class="text-center max-w-4xl mx-auto mb-16">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 uppercase">Go-To-Market Micro-Journey Gallery</h1>
+            <p class="text-lg sm:text-xl text-gray-300">A library of 15 HubSpot-LinkedIn automations designed to eliminate friction and accelerate your sales process. Click any card to see details.</p>
+        </section>
+
+        <!-- Section 2: The Gallery -->
+        <section id="gallery-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards will be dynamically inserted here by JavaScript -->
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-subtle mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const microJourneys = [
+            { id: 'instant-lead', title: '1. Instant Lead Enrichment', category: 'Friction Remover', removes: 'Manual LinkedIn profile research', adds: 'Company info, job title, connections, recent activity', trigger: 'New contact created in HubSpot' },
+            { id: 'smart-connection', title: '2. Smart Connection Request', category: 'Friction Remover', removes: 'Manual connection tracking', adds: 'Templated messages based on HubSpot data', trigger: 'Deal moves to "Qualified" stage' },
+            { id: 'social-proof', title: '3. Social Proof Research', category: 'Experience Enhancer', removes: 'Manual research before calls', adds: 'Warm intro opportunities, conversation starters', trigger: 'Meeting scheduled in HubSpot' },
+            { id: 'inmail-automation', title: '4. InMail Automation', category: 'Funnel Accelerator', removes: 'Manual follow-up tracking', adds: 'Automated re-engagement sequences', trigger: 'Contact inactive for 14+ days' },
+            { id: 'account-intelligence', title: '5. Account Intelligence', category: 'Friction Remover', removes: 'Manual company research', adds: 'Team size, growth indicators, news mentions', trigger: 'New company added to HubSpot' },
+            { id: 'morning-priority', title: '6. Morning Priority Queue', category: 'Funnel Accelerator', removes: 'Manual daily planning', adds: 'AI-powered priority scoring', trigger: 'Daily at 8 AM' },
+            { id: 'real-time-engagement', title: '7. Real-Time Engagement', category: 'Funnel Accelerator', removes: 'Manual social monitoring', adds: 'Immediate engagement opportunities', trigger: 'LinkedIn post interaction detected' },
+            { id: 'deal-progress', title: '8. Deal Progress Tracker', category: 'Funnel Accelerator', removes: 'Manual deal monitoring', adds: 'Proactive stagnation alerts', trigger: 'Deal stagnant for 7+ days' },
+            { id: 'prospect-warming', title: '9. Prospect Warming', category: 'Experience Enhancer', removes: 'Manual warming activities', adds: 'Systematic prospect engagement', trigger: 'New lead assigned' },
+            { id: 'champion-id', title: '10. Champion Identification', category: 'Experience Enhancer', removes: 'Manual network mapping', adds: 'Strategic relationship leverage', trigger: 'Deal moves to "Proposal" stage' },
+            { id: 'buying-signal', title: '11. Buying Signal Detection', category: 'Funnel Accelerator', removes: 'Manual job change monitoring', adds: 'Automatic expansion opportunities', trigger: 'LinkedIn job change notification' },
+            { id: 'competitive-intel', title: '12. Competitive Intelligence', category: 'Funnel Accelerator', removes: 'Manual competitive monitoring', adds: 'Real-time market intelligence', trigger: 'Competitor mention detected' },
+            { id: 'content-amplification', title: '13. Content Amplification', category: 'Experience Enhancer', removes: 'Disconnected marketing/sales efforts', adds: 'Multi-channel campaign coordination', trigger: 'HubSpot marketing email sent' },
+            { id: 'event-outreach', title: '14. Event-Based Outreach', category: 'Experience Enhancer', removes: 'Manual event prospecting', adds: 'Contextual event-based messaging', trigger: 'LinkedIn event attendance detected' },
+            { id: 'renewal-risk', title: '15. Renewal Risk Assessment', category: 'Friction Remover', removes: 'Manual customer health monitoring', adds: 'Proactive retention signals', trigger: 'Existing customer LinkedIn activity' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryContainer = document.getElementById('gallery-container');
+
+            // Populate Gallery
+            microJourneys.forEach(mj => {
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'mj-card-container';
+
+                const card = document.createElement('div');
+                card.className = 'mj-card';
+
+                // Front of the card
+                const cardFront = document.createElement('div');
+                cardFront.className = 'mj-card-face mj-card-front p-6';
+                cardFront.innerHTML = `
+                    <h3 class="text-xl font-bold mb-4 flex-grow">${mj.title}</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-red-500/20 mr-3 mt-1">
+                                <span class="text-red-400 font-bold">-</span>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400">Removes</p>
+                                <p class="text-gray-200">${mj.removes}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-green-500/20 mr-3 mt-1">
+                                <span class="text-green-400 font-bold">+</span>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400">Adds</p>
+                                <p class="text-gray-200">${mj.adds}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Back of the card
+                const cardBack = document.createElement('div');
+                cardBack.className = 'mj-card-face mj-card-back';
+                cardBack.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400">Category</p>
+                            <p class="font-semibold text-lg brand-green">${mj.category}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400">Trigger</p>
+                            <p class="text-gray-200">${mj.trigger}</p>
+                        </div>
+                    </div>
+                    <div class="mt-auto text-center text-xs text-gray-500 pt-4">
+                        Click to flip back
+                    </div>
+                `;
+
+                card.appendChild(cardFront);
+                card.appendChild(cardBack);
+                cardContainer.appendChild(card);
+                galleryContainer.appendChild(cardContainer);
+            });
+
+            // Event Listener for flipping cards
+            galleryContainer.addEventListener('click', (event) => {
+                const card = event.target.closest('.mj-card');
+                if (card) {
+                    card.classList.toggle('is-flipped');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
