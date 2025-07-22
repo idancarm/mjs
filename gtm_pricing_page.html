@@ -3,507 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTM Automation Pricing - Envy</title>
+    <title>GTM Automation Pricing | GoEnvy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Custom styles using the official GoEnvy Brand Palette */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #1a1a1a;
-            background: #fff;
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* Official Black */
+            color: #EDEDED; /* Official Light Gray for body text */
         }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #FF6B35;
-            margin-bottom: 20px;
+        h1, h2, h3, h4, h5, h6 {
+            color: #FFFFFF; /* Official White for headlines */
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 80px 0 60px;
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
-            color: white;
-        }
-        
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-        
-        .pricing-section {
-            padding: 80px 0;
-            background: #f8fafc;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
+        .brand-green { color: #14DF99; }
+        .bg-brand-green { background-color: #14DF99; }
+        .bg-brand-green:hover { background-color: #2AFDD4; }
+        .border-brand-green { border-color: #14DF99; }
+        .text-brand-lime { color: #D6FE51; }
+        .text-brand-turquoise { color: #44EAD4; }
+        .text-brand-pink { color: #FF1F6C; }
+        .bg-secondary { background-color: #1A1A1A; }
+        .border-subtle { border-color: #333333; }
+
         .pricing-card {
-            background: white;
-            border-radius: 16px;
-            padding: 40px 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
+            border: 1px solid #333333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        .pricing-card.featured, .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: #14DF99;
+            box-shadow: 0 10px 30px rgba(20, 223, 153, 0.1);
         }
-        
-        .pricing-card.featured {
-            border-color: #FF6B35;
-            transform: scale(1.05);
-        }
-        
-        .popular-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #FF6B35;
-            color: white;
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        
-        .plan-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .plan-description {
-            color: #64748b;
-            margin-bottom: 24px;
-        }
-        
-        .price {
-            margin-bottom: 24px;
-        }
-        
-        .price-monthly {
-            font-size: 3rem;
-            font-weight: 700;
-            color: #1a1a1a;
-        }
-        
-        .price-annual {
-            font-size: 1.125rem;
-            color: #FF6B35;
-            font-weight: 600;
-            margin-top: 8px;
-        }
-        
-        .setup-fee {
-            font-size: 0.875rem;
-            color: #64748b;
-            margin-top: 8px;
-        }
-        
-        .features {
-            list-style: none;
-            margin-bottom: 32px;
-        }
-        
-        .features li {
-            padding: 8px 0;
+        .features-list li {
             display: flex;
             align-items: center;
         }
-        
-        .features li::before {
-            content: "✓";
-            color: #10b981;
+        .features-list li::before {
+            content: '✓';
+            color: #14DF99;
             font-weight: bold;
-            margin-right: 12px;
-        }
-        
-        .cta-button {
-            width: 100%;
-            padding: 16px 24px;
-            background: #FF6B35;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            background: #e55a2e;
-        }
-        
-        .differentiation-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        }
-        
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .comparison-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            border: 2px solid transparent;
-        }
-        
-        .comparison-card.envy {
-            border-color: #FF6B35;
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
-            color: white;
-        }
-        
-        .comparison-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .comparison-card.envy h3 {
-            color: white;
-        }
-        
-        .comparison-list {
-            list-style: none;
-            text-align: left;
-        }
-        
-        .comparison-list li {
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-        }
-        
-        .comparison-card.envy .comparison-list li {
-            border-bottom-color: rgba(255,255,255,0.2);
-        }
-        
-        .comparison-list li:last-child {
-            border-bottom: none;
-        }
-        
-        .microservice-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .microservice-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border-left: 4px solid #FF6B35;
-        }
-        
-        .microservice-card h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-        
-        .microservice-card p {
-            color: #64748b;
-            line-height: 1.6;
-        }
-        
-        .support-section {
-            padding: 60px 0;
-            background: #f8fafc;
-        }
-        
-        .support-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .support-card {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-        
-        .support-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        
-        .support-price {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #FF6B35;
-            margin-bottom: 16px;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .pricing-card.featured {
-                transform: none;
-            }
-            
-            .container {
-                padding: 0 16px;
-            }
+            margin-right: 0.75rem;
         }
     </style>
 </head>
-<body>
-    <section class="hero">
-        <div class="container">
-            <div class="logo">ENVY</div>
-            <div class="hero-badge">RevOps-Engineered Automation by Envy</div>
-            <h1>GTM Automation That Actually Works</h1>
-            <p>Unlike generic tools like Dripify or LaGrowthMachine, our microservices are crafted by RevOps experts who understand your entire GTM engine. Get 90% pre-built automation with tailored customization that fits your unique business.</p>
-        </div>
-    </section>
+<body class="antialiased">
 
-    <section class="pricing-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Choose Your GTM Package</h2>
-                <p>RevOps-engineered microservices that adapt to your business, not the other way around</p>
-            </div>
-            
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name">Single</div>
-                    <div class="plan-description">Perfect for focused LinkedIn outreach</div>
-                    <div class="price">
-                        <div class="price-monthly">$50<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
-                        <div class="price-annual">$37.50/mo (billed annually)</div>
-                        <div class="setup-fee">+ $95 one-time setup</div>
+    <!-- Header -->
+    <header class="p-4 sm:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+             <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
+             <nav>
+                 <a href="index.html" class="text-sm font-medium hover:text-white transition-colors">← Back to Home</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 sm:py-16">
+
+        <!-- Section 1: Hero -->
+        <section class="text-center max-w-4xl mx-auto mb-16">
+            <p class="font-semibold brand-green mb-2 uppercase tracking-widest">Pricing</p>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">GTM AUTOMATION THAT ACTUALLY WORKS</h1>
+            <p class="text-lg sm:text-xl text-gray-300">Our micro-journeys are crafted by RevOps experts who understand your entire GTM engine. Get 90% pre-built automation with tailored customization that fits your unique business.</p>
+        </section>
+
+        <!-- Section 2: Pricing Grid -->
+        <section class="mb-24">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Plan 1: Single -->
+                <div class="pricing-card bg-secondary rounded-lg p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Single</h3>
+                    <p class="text-gray-400 mb-6">Perfect for focused LinkedIn outreach.</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold">$50</span>
+                        <span class="text-lg text-gray-400">/mo</span>
                     </div>
-                    <ul class="features">
-                        <li>1 RevOps-engineered microservice</li>
+                    <p class="text-brand-lime font-semibold mb-1">$37.50/mo (billed annually)</p>
+                    <p class="text-xs text-gray-500 mb-8">+ $95 one-time setup</p>
+                    <ul class="features-list space-y-3 mb-8 flex-grow">
+                        <li>1 RevOps-engineered micro-journey</li>
                         <li>500 credits/month</li>
                         <li>Custom business configuration</li>
-                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>HubSpot Pro optimization</li>
                         <li>Basic support included</li>
                     </ul>
-                    <button class="cta-button">Get Started</button>
+                    <a href="#" class="w-full text-center bg-gray-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-700 transition-all">Get Started</a>
                 </div>
 
-                <div class="pricing-card featured">
-                    <div class="popular-badge">Most Popular</div>
-                    <div class="plan-name">Duet</div>
-                    <div class="plan-description">Complete LinkedIn connection & messaging</div>
-                    <div class="price">
-                        <div class="price-monthly">$100<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
-                        <div class="price-annual">$75/mo (billed annually)</div>
-                        <div class="setup-fee">+ $95 one-time setup</div>
+                <!-- Plan 2: Duet (Featured) -->
+                <div class="pricing-card featured bg-secondary rounded-lg p-8 flex flex-col relative">
+                    <div class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        <span class="bg-brand-green text-black text-xs font-bold uppercase tracking-wider px-4 py-1 rounded-full">Most Popular</span>
                     </div>
-                    <ul class="features">
-                        <li>2 RevOps-engineered microservices</li>
+                    <h3 class="text-2xl font-bold mb-2">Duet</h3>
+                    <p class="text-gray-400 mb-6">Complete LinkedIn connection & messaging.</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold">$100</span>
+                        <span class="text-lg text-gray-400">/mo</span>
+                    </div>
+                    <p class="text-brand-lime font-semibold mb-1">$75/mo (billed annually)</p>
+                    <p class="text-xs text-gray-500 mb-8">+ $95 one-time setup</p>
+                    <ul class="features-list space-y-3 mb-8 flex-grow">
+                        <li>2 RevOps-engineered micro-journeys</li>
                         <li>1,200 credits/month</li>
                         <li>Custom business configuration</li>
-                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>HubSpot Pro optimization</li>
                         <li>Complete LinkedIn workflow</li>
                         <li>Basic support included</li>
                     </ul>
-                    <button class="cta-button">Get Started</button>
+                    <a href="#" class="w-full text-center bg-brand-green text-black font-bold py-3 px-8 rounded-lg hover:bg-green-400 transition-all">Get Started</a>
                 </div>
 
-                <div class="pricing-card">
-                    <div class="plan-name">Trio</div>
-                    <div class="plan-description">Full LinkedIn-to-CRM automation pipeline</div>
-                    <div class="price">
-                        <div class="price-monthly">$150<span style="font-size: 1rem; font-weight: 400;">/mo</span></div>
-                        <div class="price-annual">$112.50/mo (billed annually)</div>
-                        <div class="setup-fee">+ $95 one-time setup</div>
+                <!-- Plan 3: Trio -->
+                <div class="pricing-card bg-secondary rounded-lg p-8 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Trio</h3>
+                    <p class="text-gray-400 mb-6">Full LinkedIn-to-CRM automation pipeline.</p>
+                    <div class="mb-6">
+                        <span class="text-5xl font-extrabold">$150</span>
+                        <span class="text-lg text-gray-400">/mo</span>
                     </div>
-                    <ul class="features">
-                        <li>3 RevOps-engineered microservices</li>
+                    <p class="text-brand-lime font-semibold mb-1">$112.50/mo (billed annually)</p>
+                    <p class="text-xs text-gray-500 mb-8">+ $95 one-time setup</p>
+                    <ul class="features-list space-y-3 mb-8 flex-grow">
+                        <li>3 RevOps-engineered micro-journeys</li>
                         <li>2,000 credits/month</li>
                         <li>Custom business configuration</li>
-                        <li>HubSpot Pro optimization (no Enterprise needed)</li>
+                        <li>HubSpot Pro optimization</li>
                         <li>Complete automation pipeline</li>
                         <li>Advanced GTM tracking & insights</li>
                         <li>Basic support included</li>
                     </ul>
-                    <button class="cta-button">Get Started</button>
+                    <a href="#" class="w-full text-center bg-gray-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-700 transition-all">Get Started</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="differentiation-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Envy's Hybrid Approach Wins</h2>
-                <p>Unlike one-size-fits-all tools, we combine RevOps expertise with customized automation</p>
+        <!-- Section 3: Comparison -->
+        <section class="mb-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold">Why Our Hybrid Approach Wins</h2>
+                <p class="text-gray-400 text-lg mt-4">Unlike one-size-fits-all tools, we combine RevOps expertise with customized automation.</p>
             </div>
-            
-            <div class="comparison-grid">
-                <div class="comparison-card">
-                    <h3>Generic GTM Tools</h3>
-                    <p style="color: #64748b; margin-bottom: 20px;">Dripify, LaGrowthMachine, Expandi</p>
-                    <ul class="comparison-list">
-                        <li>❌ Rigid templates</li>
-                        <li>❌ Basic CRM integration</li>
-                        <li>❌ No GTM strategy expertise</li>
-                        <li>❌ Limited customization</li>
-                        <li>❌ Generic messaging</li>
-                        <li>❌ Poor data hygiene</li>
+            <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-secondary rounded-lg p-8 border-l-4 border-brand-pink">
+                    <h3 class="text-xl font-bold mb-4">Generic GTM Tools</h3>
+                    <ul class="space-y-3 text-gray-400">
+                        <li class="flex items-center"><span class="text-brand-pink mr-3 font-bold text-xl">×</span>Rigid templates</li>
+                        <li class="flex items-center"><span class="text-brand-pink mr-3 font-bold text-xl">×</span>Basic CRM integration</li>
+                        <li class="flex items-center"><span class="text-brand-pink mr-3 font-bold text-xl">×</span>No GTM strategy expertise</li>
+                        <li class="flex items-center"><span class="text-brand-pink mr-3 font-bold text-xl">×</span>Limited customization</li>
+                        <li class="flex items-center"><span class="text-brand-pink mr-3 font-bold text-xl">×</span>Poor data hygiene</li>
                     </ul>
                 </div>
-                
-                <div class="comparison-card envy">
-                    <h3>Envy's RevOps-Engineered Solution</h3>
-                    <p style="opacity: 0.9; margin-bottom: 20px;">90% Pre-built + Custom Configuration</p>
-                    <ul class="comparison-list">
-                        <li>✅ Tailored to your GTM strategy</li>
-                        <li>✅ Deep HubSpot native integration</li>
-                        <li>✅ RevOps expertise built-in</li>
-                        <li>✅ Custom business logic</li>
-                        <li>✅ Personalized messaging workflows</li>
-                        <li>✅ Clean data architecture</li>
-                    </ul>
-                </div>
-                
-                <div class="comparison-card">
-                    <h3>Custom Development</h3>
-                    <p style="color: #64748b; margin-bottom: 20px;">Build from scratch</p>
-                    <ul class="comparison-list">
-                        <li>❌ 6+ month timeline</li>
-                        <li>❌ $50k+ investment</li>
-                        <li>❌ Technical debt risk</li>
-                        <li>❌ Ongoing maintenance cost</li>
-                        <li>❌ No GTM best practices</li>
-                        <li>❌ Single point of failure</li>
+                <div class="bg-secondary rounded-lg p-8 border-l-4 border-brand-green">
+                    <h3 class="text-xl font-bold mb-4">Envy's RevOps-Engineered Solution</h3>
+                     <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center"><span class="brand-green mr-3 font-bold text-xl">✓</span>Tailored to your GTM strategy</li>
+                        <li class="flex items-center"><span class="brand-green mr-3 font-bold text-xl">✓</span>Deep HubSpot native integration</li>
+                        <li class="flex items-center"><span class="brand-green mr-3 font-bold text-xl">✓</span>RevOps expertise built-in</li>
+                        <li class="flex items-center"><span class="brand-green mr-3 font-bold text-xl">✓</span>Custom business logic</li>
+                        <li class="flex items-center"><span class="brand-green mr-3 font-bold text-xl">✓</span>Clean data architecture</li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="microservices-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>RevOps-Engineered Microservices</h2>
-                <p>Each microservice leverages deep GTM expertise to solve specific jobs-to-be-done</p>
-            </div>
-            
-            <div class="microservice-grid">
-                <div class="microservice-card">
-                    <h3>ICP Persona Outreach for Connection</h3>
-                    <p>Automatically search LinkedIn for prospects matching your ICP criteria and send personalized connection requests to maximize acceptance rates.</p>
-                </div>
-                
-                <div class="microservice-card">
-                    <h3>Connected ICP Persona Message Sequences</h3>
-                    <p>Execute tailored message sequences to newly connected prospects with smart follow-up automation that adapts based on engagement.</p>
-                </div>
-                
-                <div class="microservice-card">
-                    <h3>ICP Persona Signal Transmission to CRM</h3>
-                    <p>Monitor prospect responses and engagement signals, automatically syncing qualified leads and conversation data to your HubSpot CRM.</p>
-                </div>
-            </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-subtle mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
         </div>
-    </section>
+    </footer>
 
-    <section class="support-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Support Options</h2>
-                <p>Choose the level of support that fits your team's needs</p>
-            </div>
-            
-            <div class="support-grid">
-                <div class="support-card">
-                    <h3>Basic Support</h3>
-                    <div class="support-price">Included</div>
-                    <ul class="features">
-                        <li>Email support</li>
-                        <li>Documentation access</li>
-                        <li>Setup assistance</li>
-                        <li>Response within 24 hours</li>
-                    </ul>
-                </div>
-                
-                <div class="support-card">
-                    <h3>Premium Support</h3>
-                    <div class="support-price">+$50<span style="font-size: 1rem;">/mo</span></div>
-                    <ul class="features">
-                        <li>Dedicated Slack channel</li>
-                        <li>Priority ticketing system</li>
-                        <li>Same-day response</li>
-                        <li>Custom configuration help</li>
-                        <li>Monthly strategy calls</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
 </body>
 </html>
