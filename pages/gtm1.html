@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/brand.css">
     <style>
         /* Custom styles using the official GoEnvy Brand Palette */
         body {
@@ -71,8 +72,9 @@
     <header class="p-4 sm:p-6">
         <div class="container mx-auto flex justify-between items-center">
              <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
-             <nav>
-                 <a href="#" class="text-sm font-medium hover:text-white transition-colors">Back to Agency Site</a>
+             <nav class="flex items-center space-x-6">
+                 <a href="pricing.html" class="text-sm font-semibold text-white border-2 border-white rounded-full px-4 py-2 hover:bg-white hover:text-black transition-all">Pricing</a>
+                 <a href="../index-refactored.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">← Back to Home</a>
              </nav>
         </div>
     </header>
@@ -288,6 +290,9 @@
             observer.observe(animationContainer);
         });
     </script>
+
+    <!-- JavaScript -->
+    <script src="../assets/js/common.js"></script>
 
 </body>
 </html>
