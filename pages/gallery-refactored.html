@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-To-Market Micro-Journeys Gallery | GoEnvy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/brand.css">
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="p-4 sm:p-6">
+        <div class="container mx-auto flex justify-between items-center">
+             <h2 class="text-2xl font-bold">Go<span class="brand-green">Envy</span></h2>
+             <nav>
+                 <a href="../index-refactored.html" class="text-sm font-medium hover:text-white transition-colors">← Back to Home</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 sm:py-16">
+
+        <!-- Section 1: Hero -->
+        <section class="text-center max-w-4xl mx-auto mb-16">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4 uppercase">Go-To-Market Micro-Journey Gallery</h1>
+            <p class="text-lg sm:text-xl text-gray-300">A library of 15 HubSpot-LinkedIn automations designed to eliminate friction and accelerate your sales process. Click any card to see details.</p>
+        </section>
+
+        <!-- Section 2: The Gallery -->
+        <section id="gallery-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Cards will be dynamically inserted here by JavaScript -->
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="border-t border-subtle mt-16">
+        <div class="container mx-auto px-4 py-8 text-center text-gray-400">
+            <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../assets/data/micro-journeys.js"></script>
+    <script src="../assets/js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryContainer = document.getElementById('gallery-container');
+            const microJourneys = window.GoEnvyData.microJourneys;
+
+            // Populate Gallery using centralized data
+            microJourneys.forEach(mj => {
+                const cardContainer = document.createElement('div');
+                cardContainer.className = 'mj-card-container';
+
+                const card = document.createElement('div');
+                card.className = 'mj-card';
+
+                // Front of the card
+                const cardFront = document.createElement('div');
+                cardFront.className = 'mj-card-face mj-card-front p-6';
+                cardFront.innerHTML = `
+                    <h3 class="text-xl font-bold mb-4 flex-grow">${mj.title}</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-red-500/20 mr-3 mt-1">
+                                <span class="text-red-400 font-bold">-</span>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400">Removes</p>
+                                <p class="text-gray-200">${mj.removes}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 h-6 w-6 flex items-center justify-center rounded-full bg-green-500/20 mr-3 mt-1">
+                                <span class="text-green-400 font-bold">+</span>
+                            </div>
+                            <div>
+                                <p class="text-xs uppercase tracking-wider text-gray-400">Adds</p>
+                                <p class="text-gray-200">${mj.adds}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Back of the card
+                const cardBack = document.createElement('div');
+                cardBack.className = 'mj-card-face mj-card-back';
+                cardBack.innerHTML = `
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400">Category</p>
+                            <p class="font-semibold text-lg brand-green">${mj.category}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs uppercase tracking-wider text-gray-400">Trigger</p>
+                            <p class="text-gray-200">${mj.trigger}</p>
+                        </div>
+                    </div>
+                    <div class="mt-auto text-center text-xs text-gray-500 pt-4">
+                        Click to flip back
+                    </div>
+                `;
+
+                card.appendChild(cardFront);
+                card.appendChild(cardBack);
+                cardContainer.appendChild(card);
+                galleryContainer.appendChild(cardContainer);
+            });
+        });
+    </script>
+
+</body>
+</html>

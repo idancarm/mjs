@@ -1,0 +1,36 @@
+{
+  "name": "goenvy-website",
+  "version": "1.0.0",
+  "description": "GoEnvy GTM & RevOps Business Automations Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server --port=3000 --open=index-refactored.html",
+    "build": "npm run minify-css && npm run minify-js",
+    "minify-css": "cleancss -o assets/css/brand.min.css assets/css/brand.css",
+    "minify-js": "terser assets/js/common.js -o assets/js/common.min.js",
+    "lint": "eslint assets/js/**/*.js",
+    "format": "prettier --write \"**/*.{html,css,js}\"",
+    "serve": "http-server -p 3000 -o index-refactored.html"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.2",
+    "eslint": "^8.57.0",
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "prettier": "^3.2.5",
+    "terser": "^5.27.0"
+  },
+  "keywords": [
+    "gtm",
+    "revops",
+    "automation",
+    "linkedin",
+    "hubspot"
+  ],
+  "author": "GoEnvy",
+  "license": "MIT",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
