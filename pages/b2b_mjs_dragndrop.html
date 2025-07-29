@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive B2B GTM Micro-Journey Relationship Diagram</title>
+    <title>Interactive B2B GTM Micro-Journey Builder</title>
     <style>
+        /* Global Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -18,15 +19,17 @@
             padding: 20px;
         }
         
+        /* Main Container Styling */
         .container {
             max-width: 1800px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            overflow: hidden;
+            overflow: hidden; /* Ensures rounded corners are respected */
         }
         
+        /* Header Styling */
         .header {
             background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
             color: white;
@@ -45,6 +48,7 @@
             opacity: 0.9;
         }
         
+        /* Control Buttons Styling */
         .controls {
             background: #f8f9fa;
             padding: 15px 30px;
@@ -53,6 +57,7 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
         }
         
         .control-btn {
@@ -64,11 +69,12 @@
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
         
         .control-btn:hover {
             background: #e55a2e;
+            transform: translateY(-1px);
         }
         
         .control-btn.secondary {
@@ -79,12 +85,13 @@
             background: #5a6268;
         }
         
+        /* Diagram Container Styling */
         .diagram-container {
             padding: 30px;
             background: #fafbfc;
-            min-height: 800px;
+            min-height: 500px; /* Adjusted min-height */
             position: relative;
-            overflow: auto;
+            overflow: auto; /* Enables scrolling if content overflows */
         }
         
         .level {
@@ -98,6 +105,7 @@
             align-items: center;
             margin-bottom: 20px;
             gap: 15px;
+            flex-wrap: wrap; /* Allow header elements to wrap */
         }
         
         .level-number {
@@ -122,7 +130,7 @@
         .level-subtitle {
             font-size: 0.9rem;
             color: #6c757d;
-            margin-left: auto;
+            margin-left: auto; /* Pushes subtitle to the right */
         }
         
         .drop-zone {
@@ -154,7 +162,7 @@
             transform: translate(-50%, -50%);
             color: #adb5bd;
             font-style: italic;
-            pointer-events: none;
+            pointer-events: none; /* Allows clicks to pass through */
         }
         
         /* Draggable Box Styles */
@@ -163,12 +171,17 @@
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            cursor: move;
+            cursor: grab; /* Indicates draggable */
             user-select: none;
             transition: all 0.3s ease;
             position: relative;
             min-width: 160px;
             max-width: 200px;
+            /* Flexbox properties for centering content */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
         
         .draggable-box:hover {
@@ -180,6 +193,7 @@
             opacity: 0.7;
             transform: rotate(3deg) scale(1.05);
             z-index: 1000;
+            cursor: grabbing; /* Indicates active drag */
         }
         
         .draggable-box.ghost {
@@ -187,33 +201,16 @@
             transform: scale(0.95);
         }
         
-        /* Level 1: Business Outcomes */
-        .business-box {
-            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
-            color: white;
-        }
-        
-        /* Level 2: Functions */
-        .function-box {
-            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-            color: white;
-        }
-        
-        /* Level 3: JTBDs */
-        .jtbd-box {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-            color: white;
-        }
-        
-        /* Level 4: Micro-Journeys */
+        /* Level-specific Box Colors */
         .microjourney-box {
-            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); /* Orange */
             color: white;
             font-size: 0.9rem;
             min-width: 140px;
             max-width: 180px;
         }
         
+        /* Box Content Styling */
         .box-title {
             font-weight: 700;
             margin-bottom: 8px;
@@ -235,66 +232,124 @@
             font-size: 0.75rem;
         }
         
-        /* Connection Lines */
-        .connection-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        /* Statistics Panel */
-        .stats-panel {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 25px;
+        /* Selected Micro-Journeys Container */
+        .selected-mjs-container {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            min-height: 200px;
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            gap: 10px;
+            position: relative; /* For empty message */
         }
-        
-        .stat {
+
+        .selected-mjs-container:empty::before {
+            content: 'Drag micro-journeys here to add them to your selection.';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #adb5bd;
+            font-style: italic;
+            pointer-events: none;
+            text-align: center;
+            width: 80%;
+        }
+
+        .selected-mjs-container h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
             text-align: center;
         }
-        
-        .stat-number {
-            font-size: 2.5rem;
+
+        .selected-mj-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            font-size: 1rem;
+            color: #34495e;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            cursor: grab; /* Indicate draggable */
+            transition: transform 0.2s ease;
+        }
+
+        .selected-mj-item:hover {
+            transform: translateX(5px);
+        }
+
+        .selected-mj-item.dragging {
+            opacity: 0.7;
+            transform: scale(0.98);
+            cursor: grabbing;
+        }
+
+        .selected-mj-item .item-title {
+            font-weight: 600;
+        }
+
+        .selected-mj-item .item-cost {
             font-weight: 700;
             color: #FF6B35;
-            display: block;
+        }
+
+        .total-cost-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-top: 20px;
+            border-top: 2px solid #FF6B35;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            background: #e6f7f0; /* Light green background for summary */
+            border-radius: 0 0 10px 10px; /* Rounded bottom corners */
         }
         
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .total-cost-row .total-label {
+            color: #34495e;
         }
-        
-        /* Modal styles */
+
+        .total-cost-row .total-amount {
+            color: #FF6B35;
+            font-size: 1.5rem;
+        }
+
+        /* Modal styles (kept as is) */
         .modal {
-            display: none;
+            display: none; /* Hidden by default */
             position: fixed;
-            z-index: 2000;
+            z-index: 2000; /* Ensures it's on top */
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             background-color: rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
+            display: flex; 
+            align-items: center;
+            justify-content: center;
         }
         
         .modal-content {
             background-color: white;
-            margin: 5% auto;
             padding: 0;
             border-radius: 16px;
             width: 90%;
             max-width: 700px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             animation: modalSlideIn 0.3s ease;
+            overflow: hidden;
         }
         
         @keyframes modalSlideIn {
@@ -353,34 +408,102 @@
             margin-bottom: 15px;
         }
         
+        /* Responsive Adjustments */
         @media (max-width: 1200px) {
-            .container {
-                margin: 10px;
+            body {
+                padding: 10px;
             }
-            
-            .diagram-container {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .diagram-container, .selected-mjs-container {
                 padding: 20px;
+                min-height: 400px; /* Adjusted min-height */
+            }
+            .level-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .level-subtitle {
+                margin-left: 0;
+                margin-top: 5px;
             }
         }
         
         @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .header p {
+                font-size: 1rem;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 15px;
+            }
+            .control-btn {
+                width: 100%;
+                padding: 10px;
+            }
             .drop-zone {
                 gap: 10px;
                 padding: 10px;
+                min-height: 100px;
             }
-            
             .draggable-box {
-                min-width: 140px;
-                max-width: 160px;
+                min-width: 120px;
+                max-width: 100%;
+                padding: 12px;
+                font-size: 0.85rem;
+            }
+            .box-title {
+                font-size: 0.9rem;
+            }
+            .box-subtitle {
+                font-size: 0.7rem;
+            }
+            .microjourney-box {
+                min-width: 100px;
+                max-width: 100%;
+            }
+            .microjourney-box .box-title {
+                font-size: 0.8rem;
+            }
+            .microjourney-box .box-subtitle {
+                font-size: 0.65rem;
+            }
+            .selected-mjs-container {
                 padding: 15px;
             }
-            
-            .stats-panel {
-                padding: 20px;
+            .selected-mjs-container h2 {
+                font-size: 1.2rem;
             }
-            
-            .stat-number {
-                font-size: 2rem;
+            .selected-mj-item {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            .total-cost-row {
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+            .total-cost-row .total-amount {
+                font-size: 1.2rem;
+            }
+            .modal-content {
+                width: 95%;
+                margin: 2.5% auto;
+            }
+            .modal-header {
+                padding: 15px;
+            }
+            .modal-title {
+                font-size: 1.2rem;
+            }
+            .modal-body {
+                padding: 20px;
             }
         }
     </style>
@@ -388,201 +511,43 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Interactive B2B GTM Micro-Journey Ecosystem</h1>
-            <p>Drag and arrange boxes to explore relationships • Business Outcomes → Functions → Jobs-to-be-Done → Automation Solutions</p>
+            <h1>Interactive B2B GTM Micro-Journey Builder</h1>
+            <p>Drag micro-journeys to your selection below to build your custom automation package.</p>
         </div>
         
         <div class="controls">
-            <button class="control-btn" onclick="autoArrange()">Auto Arrange</button>
-            <button class="control-btn secondary" onclick="resetLayout()">Reset Layout</button>
-            <button class="control-btn secondary" onclick="showConnections()">Toggle Connections</button>
+            <button class="control-btn" onclick="autoArrange()">Auto Arrange Available</button>
+            <button class="control-btn secondary" onclick="resetLayout()">Reset All</button>
         </div>
         
         <div class="diagram-container" id="diagramContainer">
-            <canvas class="connection-canvas" id="connectionCanvas"></canvas>
-            
-            <!-- Level 1: Business Outcomes -->
+            <!-- Level 4: Micro-Journeys (Available for selection) -->
             <div class="level">
                 <div class="level-header">
                     <div class="level-number">1</div>
-                    <div class="level-title">B2B Business Outcomes</div>
-                    <div class="level-subtitle">Strategic goals that drive everything below</div>
-                </div>
-                <div class="drop-zone" id="level1" data-level="1">
-                    <div class="draggable-box business-box" draggable="true" data-id="revenue-growth" onclick="showDetails('revenue-growth', 'business')">
-                        <div class="box-title">Revenue Growth</div>
-                        <div class="box-subtitle">Accelerate deal velocity and maximize customer value</div>
-                    </div>
-                    <div class="draggable-box business-box" draggable="true" data-id="operational-efficiency" onclick="showDetails('operational-efficiency', 'business')">
-                        <div class="box-title">Operational Efficiency</div>
-                        <div class="box-subtitle">Reduce manual tasks and scale with quality</div>
-                    </div>
-                    <div class="draggable-box business-box" draggable="true" data-id="competitive-advantage" onclick="showDetails('competitive-advantage', 'business')">
-                        <div class="box-title">Competitive Advantage</div>  
-                        <div class="box-subtitle">Win more deals and capture market share</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Level 2: Functions -->
-            <div class="level">
-                <div class="level-header">
-                    <div class="level-number">2</div>
-                    <div class="level-title">Sales & Marketing Functions</div>
-                    <div class="level-subtitle">Operational teams executing the strategy</div>
-                </div>
-                <div class="drop-zone" id="level2" data-level="2">
-                    <div class="draggable-box function-box" draggable="true" data-id="lead-generation" onclick="showDetails('lead-generation', 'function')">
-                        <div class="box-title">Lead Generation</div>
-                        <div class="box-subtitle">Identify and capture high-intent prospects</div>
-                    </div>
-                    <div class="draggable-box function-box" draggable="true" data-id="sales-development" onclick="showDetails('sales-development', 'function')">
-                        <div class="box-title">Sales Development</div>
-                        <div class="box-subtitle">Nurture prospects through qualification</div>
-                    </div>
-                    <div class="draggable-box function-box" draggable="true" data-id="account-management" onclick="showDetails('account-management', 'function')">
-                        <div class="box-title">Account Management</div>
-                        <div class="box-subtitle">Expand relationships and drive growth</div>
-                    </div>
-                    <div class="draggable-box function-box" draggable="true" data-id="marketing-ops" onclick="showDetails('marketing-ops', 'function')">
-                        <div class="box-title">Marketing Operations</div>
-                        <div class="box-subtitle">Enable sales with data and content</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Level 3: Jobs-to-be-Done -->
-            <div class="level">
-                <div class="level-header">
-                    <div class="level-number">3</div>
-                    <div class="level-title">Core Jobs-to-be-Done</div>
-                    <div class="level-subtitle">What teams need to accomplish daily</div>
-                </div>
-                <div class="drop-zone" id="level3" data-level="3">
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="personalize-scale" onclick="showDetails('personalize-scale', 'jtbd')">
-                        <div class="box-title">Personalize at Scale</div>
-                        <div class="box-subtitle">Relevant messaging for hundreds of prospects</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="prioritize-pipeline" onclick="showDetails('prioritize-pipeline', 'jtbd')">
-                        <div class="box-title">Prioritize Pipeline</div>
-                        <div class="box-subtitle">Focus on highest-value opportunities</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="leverage-network" onclick="showDetails('leverage-network', 'jtbd')">
-                        <div class="box-title">Leverage Network</div>
-                        <div class="box-subtitle">Activate relationships for warm intros</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="build-relationships" onclick="showDetails('build-relationships', 'jtbd')">
-                        <div class="box-title">Build Relationships</div>
-                        <div class="box-subtitle">Develop authentic connections</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="time-outreach" onclick="showDetails('time-outreach', 'jtbd')">
-                        <div class="box-title">Perfect Timing</div>
-                        <div class="box-subtitle">Contact prospects at optimal moments</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="conversation-starters" onclick="showDetails('conversation-starters', 'jtbd')">
-                        <div class="box-title">Find Conversation Starters</div>
-                        <div class="box-subtitle">Discover relevant engagement hooks</div>
-                    </div>
-                    <div class="draggable-box jtbd-box" draggable="true" data-id="scale-outreach" onclick="showDetails('scale-outreach', 'jtbd')">
-                        <div class="box-title">Scale Outreach</div>
-                        <div class="box-subtitle">Increase volume without losing quality</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Level 4: Micro-Journeys -->
-            <div class="level">
-                <div class="level-header">
-                    <div class="level-number">4</div>
-                    <div class="level-title">Automation Micro-Journeys</div>
-                    <div class="level-subtitle">Specific solutions addressing the JTBDs</div>
+                    <div class="level-title">Available Automation Micro-Journeys</div>
+                    <div class="level-subtitle">Drag these solutions to your selection below</div>
                 </div>
                 <div class="drop-zone" id="level4" data-level="4">
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="instant-lead" onclick="showDetails('instant-lead', 'microjourney')">
-                        <div class="box-title">Instant Lead Enrichment</div>
-                        <div class="box-subtitle">Auto-populate contact data</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="smart-connection" onclick="showDetails('smart-connection', 'microjourney')">
-                        <div class="box-title">Smart Connection Requests</div>
-                        <div class="box-subtitle">Personalized LinkedIn outreach</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="social-proof" onclick="showDetails('social-proof', 'microjourney')">
-                        <div class="box-title">Social Proof Research</div>
-                        <div class="box-subtitle">Find mutual connections</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="inmail-automation" onclick="showDetails('inmail-automation', 'microjourney')">
-                        <div class="box-title">InMail Automation</div>
-                        <div class="box-subtitle">Re-engage inactive prospects</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="account-intelligence" onclick="showDetails('account-intelligence', 'microjourney')">
-                        <div class="box-title">Account Intelligence</div>
-                        <div class="box-subtitle">Company research automation</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="priority-queue" onclick="showDetails('priority-queue', 'microjourney')">
-                        <div class="box-title">Morning Priority Queue</div>
-                        <div class="box-subtitle">Daily prioritized task list</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="engagement-tracking" onclick="showDetails('engagement-tracking', 'microjourney')">
-                        <div class="box-title">Real-Time Engagement</div>
-                        <div class="box-subtitle">Monitor social interactions</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="deal-tracker" onclick="showDetails('deal-tracker', 'microjourney')">
-                        <div class="box-title">Deal Progress Tracker</div>
-                        <div class="box-subtitle">Prevent stagnant opportunities</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="prospect-warming" onclick="showDetails('prospect-warming', 'microjourney')">
-                        <div class="box-title">Prospect Warming</div>
-                        <div class="box-subtitle">Build familiarity before outreach</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="champion-id" onclick="showDetails('champion-id', 'microjourney')">
-                        <div class="box-title">Champion Identification</div>
-                        <div class="box-subtitle">Find internal advocates</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="buying-signals" onclick="showDetails('buying-signals', 'microjourney')">
-                        <div class="box-title">Buying Signal Detection</div>
-                        <div class="box-subtitle">Spot job changes and opportunities</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="competitive-intel" onclick="showDetails('competitive-intel', 'microjourney')">
-                        <div class="box-title">Competitive Intelligence</div>
-                        <div class="box-subtitle">Monitor competitor mentions</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="content-amplification" onclick="showDetails('content-amplification', 'microjourney')">
-                        <div class="box-title">Content Amplification</div>
-                        <div class="box-subtitle">Coordinate marketing campaigns</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="event-outreach" onclick="showDetails('event-outreach', 'microjourney')">
-                        <div class="box-title">Event-Based Outreach</div>
-                        <div class="box-subtitle">Context from shared events</div>
-                    </div>
-                    <div class="draggable-box microjourney-box" draggable="true" data-id="renewal-risk" onclick="showDetails('renewal-risk', 'microjourney')">
-                        <div class="box-title">Renewal Risk Assessment</div>
-                        <div class="box-subtitle">Monitor customer health signals</div>
-                    </div>
+                    <!-- Micro-journey boxes will be dynamically added here by JavaScript -->
                 </div>
             </div>
         </div>
-        
-        <div class="stats-panel">
-            <div class="stat">
-                <span class="stat-number">3</span>
-                <div class="stat-label">Business Outcomes</div>
+
+        <!-- New Section: Selected Micro-Journeys -->
+        <div class="selected-mjs-container" id="selectedMicroJourneysContainer">
+            <h2>Your Selected Micro-Journeys</h2>
+            <div id="selectedMjList">
+                <!-- Dropped micro-journeys will appear here as line items -->
             </div>
-            <div class="stat">
-                <span class="stat-number">4</span>
-                <div class="stat-label">Core Functions</div>
-            </div>
-            <div class="stat">
-                <span class="stat-number">7</span>
-                <div class="stat-label">Jobs-to-be-Done</div>
-            </div>
-            <div class="stat">
-                <span class="stat-number">15</span>
-                <div class="stat-label">Micro-Journeys</div>
+            <div class="total-cost-row">
+                <span class="total-label">Total Monthly Cost:</span>
+                <span id="totalCost" class="total-amount">$0</span>
             </div>
         </div>
     </div>
     
-    <!-- Modal -->
+    <!-- Modal Structure -->
     <div id="modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -597,60 +562,200 @@
     </div>
     
     <script>
-        // Drag and Drop Functionality
+        // Global variables for drag and drop
         let draggedElement = null;
-        let draggedFromLevel = null;
-        let connectionsVisible = false;
-        let canvas = null;
-        let ctx = null;
+        let draggedFromContainerId = null; // To track source container (level4 or selectedMjList)
         
-        // Initialize the application
+        // Data for micro-journeys and modal content
+        const contentData = {
+            'microjourney': {
+                'instant-lead': {
+                    title: 'Instant Lead Enrichment',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> New contact created in HubSpot</p><p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn API search → Data enrichment → HubSpot update</p><p><strong>Time Saved:</strong> 5-10 minutes per lead</p><p><strong>Value Added:</strong> Company info, job title, connections, recent activity automatically populated</p><p>Transforms manual research into instant, comprehensive data enrichment that becomes the foundation for all subsequent outreach activities.</p>`
+                },
+                'smart-connection': {
+                    title: 'Smart Connection Requests',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Deal moves to "Qualified" stage</p><p><strong>Workflow:</strong> HubSpot Trigger → Check LinkedIn status → Generate personalized request → Create HubSpot task</p><p><strong>Time Saved:</strong> 3-5 minutes per prospect</p><p><strong>Value Added:</strong> Templated messages based on HubSpot data with high acceptance rates</p><p>Automatically generates highly personalized LinkedIn connection requests using CRM data and LinkedIn insights.</p>`
+                },
+                'social-proof': {
+                    title: 'Social Proof Research',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Meeting scheduled in HubSpot</p><p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn network analysis → Identify mutual connections → Generate warm intro suggestions</p><p><strong>Time Saved:</strong> 5-10 minutes per meeting</p><p><strong>Value Added:</strong> Warm intro opportunities, conversation starters</p><p>Automates research to find mutual connections and relevant social proof points before sales meetings, enhancing credibility.</p>`
+                },
+                'inmail-automation': {
+                    title: 'InMail Automation',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Contact inactive for 14+ days</p><p><strong>Workflow:</strong> HubSpot Trigger → Check LinkedIn status → Generate personalized InMail draft → Create HubSpot task</p><p><strong>Time Saved:</strong> 5-8 minutes per re-engagement</p><p><strong>Value Added:</strong> Automated re-engagement sequences for inactive prospects</p><p>Automatically drafts personalized LinkedIn InMails to re-engage inactive prospects based on CRM data and LinkedIn activity.</p>`
+                },
+                'account-intelligence': {
+                    title: 'Account Intelligence',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> New company added to HubSpot</p><p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn company search → Extract company details → Update HubSpot properties</p><p><strong>Time Saved:</strong> 10-15 minutes per company</p><p><strong>Value Added:</strong> Automated company research including team size, growth indicators, news mentions</p><p>Automates the gathering of comprehensive account-level intelligence from LinkedIn, providing sales teams with deeper insights.</p>`
+                },
+                'priority-queue': {
+                    title: 'Morning Priority Queue',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Daily at 8 AM</p><p><strong>Workflow:</strong> Cron Trigger → Query HubSpot for hot prospects → Check LinkedIn activity → Generate prioritized list → Send notification</p><p><strong>Time Saved:</strong> 15-20 minutes daily</p><p><strong>Value Added:</strong> AI-powered priority scoring for optimal time allocation</p><p>Automatically generates a prioritized task list each morning based on prospect engagement and buying signals.</p>`
+                },
+                'engagement-tracking': {
+                    title: 'Real-Time Engagement',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> LinkedIn post interaction detected</p><p><strong>Workflow:</strong> LinkedIn Webhook → Identify interacting contact → Match to HubSpot → Log activity → Create follow-up task</p><p><strong>Time Saved:</strong> Immediate action, preventing missed opportunities</p><p><strong>Value Added:</strong> Immediate engagement opportunities based on social interactions</p><p>Monitors LinkedIn for real-time engagement signals (likes, comments, shares) from target accounts, triggering immediate follow-up tasks.</p>`
+                },
+                'deal-tracker': {
+                    title: 'Deal Progress Tracker',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Deal stagnant for 7+ days</p><p><strong>Workflow:</strong> HubSpot Trigger → Check LinkedIn activity for associated contacts → Generate stagnation alert → Suggest next steps</p><p><strong>Time Saved:</strong> Proactive identification of stalled deals</p><p><strong>Value Added:</strong> Proactive stagnation alerts and suggested actions to prevent stalled opportunities</p><p>Automatically identifies and alerts sales teams to deals that have become stagnant, suggesting actions to re-energize them.</p>`
+                },
+                'prospect-warming': {
+                    title: 'Prospect Warming',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> New lead assigned</p><p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn profile view → Extract recent activity → Schedule 3-touch sequence → Update timeline</p><p><strong>Time Saved:</strong> 7-12 minutes per new lead</p><p><strong>Value Added:</strong> Systematic prospect engagement that builds familiarity before direct outreach</p><p>Implements a systematic warming strategy that builds recognition and curiosity before any direct sales contact.</p>`
+                },
+                'champion-id': {
+                    title: 'Champion Identification',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Deal moves to "Proposal" stage</p><p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn network analysis → Identify mutual connections → Create introduction requests</p><p><strong>Time Saved:</strong> 12-18 minutes per opportunity</p><p><strong>Value Added:</strong> Strategic relationship leverage and warm introduction paths</p><p>Maps relationship networks to identify internal champions who can advocate for your solution within the prospect's organization.</p>`
+                },
+                'buying-signals': {
+                    title: 'Buying Signal Detection',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> LinkedIn job change notification</p><p><strong>Workflow:</strong> LinkedIn Webhook → Match to HubSpot contacts → Check company transition → Create opportunity → Alert sales rep</p><p><strong>Time Saved:</strong> 8-15 minutes per signal</p><p><strong>Value Added:</strong> Automatic expansion opportunities from job changes</p><p>Monitors LinkedIn for job changes among your network, automatically identifying high-converting expansion opportunities.</p>`
+                },
+                'competitive-intel': {
+                    title: 'Competitive Intelligence',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Competitor mention detected</p><p><strong>Workflow:</strong> Social listening tool → Identify competitor mentions on LinkedIn → Alert sales/marketing → Suggest counter-messaging</p><p><strong>Time Saved:</strong> Real-time market intelligence gathering</p><p><strong>Value Added:</strong> Real-time market intelligence and competitive counter-messaging suggestions</p><p>Monitors LinkedIn and other social platforms for mentions of competitors, providing real-time competitive intelligence to sales teams.</p>`
+                },
+                'content-amplification': {
+                    title: 'Content Amplification',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> HubSpot marketing email sent</p><p><strong>Workflow:</strong> HubSpot Trigger → Identify target contacts → Suggest LinkedIn share/engagement → Create sales task</p><p><strong>Time Saved:</strong> Coordinated marketing and sales efforts</p><p><strong>Value Added:</strong> Multi-channel campaign coordination and increased content reach</p><p>Aligns marketing content distribution with sales outreach by suggesting relevant LinkedIn shares and engagements to sales reps.</p>`
+                },
+                'event-outreach': {
+                    title: 'Event-Based Outreach',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> LinkedIn event attendance detected</p><p><strong>Workflow:</strong> LinkedIn API → Match attendees to HubSpot → Generate event-specific outreach → Schedule follow-up sequence</p><p><strong>Time Saved:</strong> 15-25 minutes per event</p><p><strong>Value Added:</strong> Contextual event-based messaging with higher response rates</p><p>Automates the process of identifying event attendees and creating personalized outreach that references shared experiences.</p>`
+                },
+                'renewal-risk': {
+                    title: 'Renewal Risk Assessment',
+                    subtitle: 'HubSpot-LinkedIn Automation',
+                    cost: 50,
+                    text: `<p><strong>Trigger:</strong> Existing customer LinkedIn activity (e.g., job search, new connections in competitor space)</p><p><strong>Workflow:</strong> LinkedIn Webhook → Identify risky activity → Match to HubSpot customer → Alert account manager → Suggest proactive engagement</p><p><strong>Time Saved:</strong> Proactive identification of retention risks</p><p><strong>Value Added:</strong> Proactive retention signals and suggested interventions to prevent churn</p><p>Monitors LinkedIn activity of existing customers to detect potential renewal risks, allowing account managers to intervene proactively.</p>`
+                }
+            }
+        };
+
+        // --- DOM Elements ---
+        const level4DropZone = document.getElementById('level4');
+        const selectedMjList = document.getElementById('selectedMjList');
+        const totalCostElement = document.getElementById('totalCost');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalSubtitle = document.getElementById('modal-subtitle');
+        const modalText = document.getElementById('modal-text');
+
+        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', function() {
+            populateLevel4(); // Fill Level 4 with all micro-journeys initially
             initializeDragAndDrop();
-            initializeCanvas();
-            autoArrange();
+            updateTotalCost(); // Initialize total cost to 0
         });
         
+        // Populate Level 4 with all micro-journeys from contentData
+        function populateLevel4() {
+            for (const id in contentData.microjourney) {
+                const mj = contentData.microjourney[id];
+                const box = createMicroJourneyBox(id, mj.title, mj.subtitle);
+                level4DropZone.appendChild(box);
+            }
+        }
+
+        // Creates a draggable micro-journey box for Level 4
+        function createMicroJourneyBox(id, title, subtitle) {
+            const box = document.createElement('div');
+            box.className = 'draggable-box microjourney-box';
+            box.draggable = true;
+            box.dataset.id = id;
+            box.dataset.type = 'microjourney'; // Explicitly set type
+            box.innerHTML = `
+                <div class="box-title">${title}</div>
+                <div class="box-subtitle">${subtitle}</div>
+            `;
+            box.onclick = () => showDetails(id, 'microjourney');
+            box.addEventListener('dragstart', handleDragStart);
+            box.addEventListener('dragend', handleDragEnd);
+            return box;
+        }
+
+        // Creates a line item for the selected micro-journeys container
+        function createSelectedLineItem(id, title, cost) {
+            const item = document.createElement('div');
+            item.className = 'selected-mj-item';
+            item.draggable = true; // Make line item draggable back
+            item.dataset.id = id;
+            item.dataset.type = 'selected-microjourney'; // New type for selected items
+            item.dataset.cost = cost; // Store cost on the element
+            item.innerHTML = `
+                <span class="item-title">${title}</span>
+                <span class="item-cost">$${cost}</span>
+            `;
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            // Add click listener for modal details
+            item.onclick = () => showDetails(id, 'microjourney');
+            return item;
+        }
+
+        // --- Drag and Drop Functions ---
         function initializeDragAndDrop() {
-            const draggableBoxes = document.querySelectorAll('.draggable-box');
-            const dropZones = document.querySelectorAll('.drop-zone');
-            
-            // Set up drag events for boxes
-            draggableBoxes.forEach(box => {
-                box.addEventListener('dragstart', handleDragStart);
-                box.addEventListener('dragend', handleDragEnd);
-            });
-            
-            // Set up drop zones
-            dropZones.forEach(zone => {
-                zone.addEventListener('dragover', handleDragOver);
-                zone.addEventListener('dragenter', handleDragEnter);
-                zone.addEventListener('dragleave', handleDragLeave);
-                zone.addEventListener('drop', handleDrop);
-            });
+            // Add drop listeners to both potential drop zones
+            level4DropZone.addEventListener('dragover', handleDragOver);
+            level4DropZone.addEventListener('dragenter', handleDragEnter);
+            level4DropZone.addEventListener('dragleave', handleDragLeave);
+            level4DropZone.addEventListener('drop', handleDrop);
+
+            selectedMicroJourneysContainer.addEventListener('dragover', handleDragOver);
+            selectedMicroJourneysContainer.addEventListener('dragenter', handleDragEnter);
+            selectedMicroJourneysContainer.addEventListener('dragleave', handleDragLeave);
+            selectedMicroJourneysContainer.addEventListener('drop', handleDrop);
         }
         
         function handleDragStart(e) {
             draggedElement = this;
-            draggedFromLevel = this.closest('.drop-zone').dataset.level;
+            draggedFromContainerId = this.parentNode.id; // Get ID of parent container
             this.classList.add('dragging');
             
-            // Create a ghost image
             setTimeout(() => {
                 this.classList.add('ghost');
             }, 0);
             
             e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', this.outerHTML);
+            e.dataTransfer.setData('text/plain', this.dataset.id); // Pass the ID
         }
         
         function handleDragEnd(e) {
             this.classList.remove('dragging', 'ghost');
             draggedElement = null;
-            draggedFromLevel = null;
+            draggedFromContainerId = null;
             
-            // Remove drag-over class from all drop zones
-            document.querySelectorAll('.drop-zone').forEach(zone => {
+            document.querySelectorAll('.drop-zone, .selected-mjs-container').forEach(zone => {
                 zone.classList.remove('drag-over');
             });
         }
@@ -659,21 +764,37 @@
             if (e.preventDefault) {
                 e.preventDefault();
             }
-            e.dataTransfer.dropEffect = 'move';
+            // Allow drop if dragging from Level 4 to Selected or vice versa
+            // And if the item is not already in the target container
+            const targetContainerId = this.id;
+            const draggedId = draggedElement ? draggedElement.dataset.id : null;
+
+            if (draggedId && (
+                (draggedFromContainerId === 'level4' && targetContainerId === 'selectedMicroJourneysContainer' && !selectedMjList.querySelector(`[data-id="${draggedId}"]`)) ||
+                (draggedFromContainerId === 'selectedMjList' && targetContainerId === 'level4' && !level4DropZone.querySelector(`[data-id="${draggedId}"]`))
+            )) {
+                e.dataTransfer.dropEffect = 'move';
+                this.classList.add('drag-over');
+            } else {
+                e.dataTransfer.dropEffect = 'none';
+                this.classList.remove('drag-over'); // Ensure it's removed if not a valid drop
+            }
             return false;
         }
         
         function handleDragEnter(e) {
-            const currentLevel = this.dataset.level;
-            
-            // Only allow dropping in the same level
-            if (draggedFromLevel === currentLevel) {
+            const targetContainerId = this.id;
+            const draggedId = draggedElement ? draggedElement.dataset.id : null;
+
+            if (draggedId && (
+                (draggedFromContainerId === 'level4' && targetContainerId === 'selectedMicroJourneysContainer' && !selectedMjList.querySelector(`[data-id="${draggedId}"]`)) ||
+                (draggedFromContainerId === 'selectedMjList' && targetContainerId === 'level4' && !level4DropZone.querySelector(`[data-id="${draggedId}"]`))
+            )) {
                 this.classList.add('drag-over');
             }
         }
         
         function handleDragLeave(e) {
-            // Only remove if we're actually leaving the drop zone
             if (!this.contains(e.relatedTarget)) {
                 this.classList.remove('drag-over');
             }
@@ -684,240 +805,95 @@
                 e.stopPropagation();
             }
             
-            const currentLevel = this.dataset.level;
-            
-            // Only allow dropping in the same level
-            if (draggedElement && draggedFromLevel === currentLevel) {
-                // Find the position to insert
-                const afterElement = getDragAfterElement(this, e.clientX, e.clientY);
-                
-                if (afterElement == null) {
-                    this.appendChild(draggedElement);
-                } else {
-                    this.insertBefore(draggedElement, afterElement);
+            const targetContainer = this;
+            const draggedId = e.dataTransfer.getData('text/plain');
+            const mjData = contentData.microjourney[draggedId];
+
+            if (!draggedElement || !mjData) {
+                targetContainer.classList.remove('drag-over');
+                return false;
+            }
+
+            // Logic for dropping from Level 4 to Selected Micro-Journeys
+            if (draggedFromContainerId === 'level4' && targetContainer.id === 'selectedMicroJourneysContainer') {
+                if (!selectedMjList.querySelector(`[data-id="${draggedId}"]`)) { // Prevent duplicates
+                    const lineItem = createSelectedLineItem(draggedId, mjData.title, mjData.cost);
+                    selectedMjList.appendChild(lineItem);
+                    draggedElement.remove(); // Remove original box from Level 4
+                    updateTotalCost();
                 }
-                
-                // Update connections if visible
-                if (connectionsVisible) {
-                    drawConnections();
+            } 
+            // Logic for dropping from Selected Micro-Journeys back to Level 4
+            else if (draggedFromContainerId === 'selectedMjList' && targetContainer.id === 'level4') {
+                if (!level4DropZone.querySelector(`[data-id="${draggedId}"]`)) { // Prevent duplicates
+                    const box = createMicroJourneyBox(draggedId, mjData.title, mjData.subtitle);
+                    level4DropZone.appendChild(box);
+                    draggedElement.remove(); // Remove line item from Selected
+                    updateTotalCost();
                 }
             }
             
-            this.classList.remove('drag-over');
+            targetContainer.classList.remove('drag-over');
             return false;
         }
-        
-        function getDragAfterElement(container, x, y) {
-            const draggableElements = [...container.querySelectorAll('.draggable-box:not(.dragging)')];
-            
-            return draggableElements.reduce((closest, child) => {
-                const box = child.getBoundingClientRect();
-                const offset = x - box.left - box.width / 2;
-                
-                if (offset < 0 && offset > closest.offset) {
-                    return { offset: offset, element: child };
-                } else {
-                    return closest;
-                }
-            }, { offset: Number.NEGATIVE_INFINITY }).element;
-        }
-        
-        // Canvas and Connections
-        function initializeCanvas() {
-            canvas = document.getElementById('connectionCanvas');
-            ctx = canvas.getContext('2d');
-            resizeCanvas();
-            
-            window.addEventListener('resize', resizeCanvas);
-        }
-        
-        function resizeCanvas() {
-            const container = document.getElementById('diagramContainer');
-            canvas.width = container.scrollWidth;
-            canvas.height = container.scrollHeight;
-        }
-        
-        function drawConnections() {
-            if (!ctx) return;
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            if (!connectionsVisible) return;
-            
-            // Define relationships between levels (sample connections)
-            const connections = [
-                // Business to Functions
-                { from: 'revenue-growth', to: 'sales-development' },
-                { from: 'revenue-growth', to: 'account-management' },
-                { from: 'operational-efficiency', to: 'marketing-ops' },
-                { from: 'competitive-advantage', to: 'lead-generation' },
-                
-                // Functions to JTBDs
-                { from: 'sales-development', to: 'personalize-scale' },
-                { from: 'sales-development', to: 'prioritize-pipeline' },
-                { from: 'lead-generation', to: 'conversation-starters' },
-                { from: 'account-management', to: 'build-relationships' },
-                { from: 'marketing-ops', to: 'scale-outreach' },
-                
-                // JTBDs to Micro-Journeys
-                { from: 'personalize-scale', to: 'instant-lead' },
-                { from: 'personalize-scale', to: 'smart-connection' },
-                { from: 'prioritize-pipeline', to: 'priority-queue' },
-                { from: 'prioritize-pipeline', to: 'buying-signals' },
-                { from: 'leverage-network', to: 'champion-id' },
-                { from: 'build-relationships', to: 'prospect-warming' },
-                { from: 'time-outreach', to: 'engagement-tracking' },
-                { from: 'conversation-starters', to: 'event-outreach' },
-                { from: 'scale-outreach', to: 'content-amplification' }
-            ];
-            
-            // Draw connections
-            connections.forEach(connection => {
-                drawConnection(connection.from, connection.to);
+
+        // --- Cost Calculation Function ---
+        function updateTotalCost() {
+            let total = 0;
+            selectedMjList.querySelectorAll('.selected-mj-item').forEach(item => {
+                total += parseFloat(item.dataset.cost || 0);
             });
+            totalCostElement.textContent = `$${total.toFixed(0)}`; // Display as integer for now
         }
-        
-        function drawConnection(fromId, toId) {
-            const fromElement = document.querySelector(`[data-id="${fromId}"]`);
-            const toElement = document.querySelector(`[data-id="${toId}"]`);
-            
-            if (!fromElement || !toElement) return;
-            
-            const fromRect = fromElement.getBoundingClientRect();
-            const toRect = toElement.getBoundingClientRect();
-            const containerRect = document.getElementById('diagramContainer').getBoundingClientRect();
-            
-            // Calculate connection points
-            const fromX = fromRect.left + fromRect.width / 2 - containerRect.left;
-            const fromY = fromRect.bottom - containerRect.top;
-            const toX = toRect.left + toRect.width / 2 - containerRect.left;
-            const toY = toRect.top - containerRect.top;
-            
-            // Draw curved line
-            ctx.strokeStyle = '#FF6B35';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([]);
-            
-            ctx.beginPath();
-            ctx.moveTo(fromX, fromY);
-            
-            // Create a smooth curve
-            const controlY = fromY + (toY - fromY) * 0.5;
-            ctx.bezierCurveTo(fromX, controlY, toX, controlY, toX, toY);
-            
-            ctx.stroke();
-            
-            // Draw arrow head
-            drawArrowHead(toX, toY, Math.atan2(toY - controlY, toX - toX));
-        }
-        
-        function drawArrowHead(x, y, angle) {
-            const headLength = 8;
-            
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(
-                x - headLength * Math.cos(angle - Math.PI / 6),
-                y - headLength * Math.sin(angle - Math.PI / 6)
-            );
-            ctx.moveTo(x, y);
-            ctx.lineTo(
-                x - headLength * Math.cos(angle + Math.PI / 6),
-                y - headLength * Math.sin(angle + Math.PI / 6)
-            );
-            ctx.stroke();
-        }
-        
-        // Layout Functions
+
+        // --- Layout Control Functions ---
         function autoArrange() {
-            // Arrange items in a grid-like pattern within each level
-            const levels = [
-                { id: 'level1', itemsPerRow: 3 },
-                { id: 'level2', itemsPerRow: 4 },
-                { id: 'level3', itemsPerRow: 4 },
-                { id: 'level4', itemsPerRow: 5 }
-            ];
+            // Only arrange Level 4 (Available Micro-Journeys)
+            const container = level4DropZone;
+            const items = Array.from(container.querySelectorAll('.draggable-box'));
             
-            levels.forEach(level => {
-                const container = document.getElementById(level.id);
-                const items = container.querySelectorAll('.draggable-box');
-                
-                // Clear current arrangement
-                items.forEach(item => {
-                    container.appendChild(item);
-                });
-            });
-            
-            // Redraw connections if visible
-            setTimeout(() => {
-                if (connectionsVisible) {
-                    drawConnections();
-                }
-            }, 100);
+            // Clear current children to re-append in order
+            items.forEach(item => container.removeChild(item));
+            items.forEach(item => container.appendChild(item));
         }
         
         function resetLayout() {
-            // Reset to original positions
-            const originalLayout = {
-                'level1': ['revenue-growth', 'operational-efficiency', 'competitive-advantage'],
-                'level2': ['lead-generation', 'sales-development', 'account-management', 'marketing-ops'],
-                'level3': ['personalize-scale', 'prioritize-pipeline', 'leverage-network', 'build-relationships', 'time-outreach', 'conversation-starters', 'scale-outreach'],
-                'level4': ['instant-lead', 'smart-connection', 'social-proof', 'inmail-automation', 'account-intelligence', 'priority-queue', 'engagement-tracking', 'deal-tracker', 'prospect-warming', 'champion-id', 'buying-signals', 'competitive-intel', 'content-amplification', 'event-outreach', 'renewal-risk']
-            };
+            // Clear both containers
+            level4DropZone.innerHTML = '';
+            selectedMjList.innerHTML = '';
             
-            Object.entries(originalLayout).forEach(([levelId, itemIds]) => {
-                const container = document.getElementById(levelId);
-                itemIds.forEach(itemId => {
-                    const item = document.querySelector(`[data-id="${itemId}"]`);
-                    if (item) {
-                        container.appendChild(item);
-                    }
-                });
-            });
-            
-            setTimeout(() => {
-                if (connectionsVisible) {
-                    drawConnections();
-                }
-            }, 100);
+            // Re-populate Level 4 with all micro-journeys
+            populateLevel4();
+            updateTotalCost();
         }
         
-        function showConnections() {
-            connectionsVisible = !connectionsVisible;
+        // --- Modal Functions ---
+        function showDetails(id, type) {
+            const content = contentData[type][id]; 
             
-            if (connectionsVisible) {
-                resizeCanvas();
-                drawConnections();
+            if (content) {
+                modalTitle.textContent = content.title;
+                modalSubtitle.textContent = content.subtitle;
+                modalText.innerHTML = content.text;
+                
+                modal.style.display = 'flex'; 
+                document.body.style.overflow = 'hidden';
             } else {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                modalTitle.textContent = 'Details Not Available';
+                modalSubtitle.textContent = 'Information';
+                modalText.innerHTML = '<p>Content for this item is being developed or is missing.</p>';
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
             }
         }
         
-        // Modal Functions
-        function showDetails(id, type) {
-            const modal = document.getElementById('modal');
-            const title = document.getElementById('modal-title');
-            const subtitle = document.getElementById('modal-subtitle');
-            const text = document.getElementById('modal-text');
-            
-            const content = getContent(id, type);
-            title.textContent = content.title;
-            subtitle.textContent = content.subtitle;
-            text.innerHTML = content.text;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-        
         function closeModal() {
-            const modal = document.getElementById('modal');
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
         }
         
-        // Close modal when clicking outside
+        // Close modal when clicking outside of the modal content
         window.onclick = function(event) {
-            const modal = document.getElementById('modal');
             if (event.target === modal) {
                 closeModal();
             }
@@ -929,254 +905,6 @@
                 closeModal();
             }
         });
-        
-        function getContent(id, type) {
-            const businessContent = {
-                'revenue-growth': {
-                    title: 'Revenue Growth',
-                    subtitle: 'Primary Business Outcome',
-                    text: `
-                        <p>The fundamental driver of business success - increasing revenue through faster deal cycles, higher conversion rates, and expanded customer relationships.</p>
-                        <p>This outcome drives the need for efficient sales processes, effective lead qualification, and strategic account expansion capabilities.</p>
-                        <p><strong>Key Metrics:</strong> Annual Recurring Revenue (ARR), Deal Velocity, Win Rate, Customer Lifetime Value</p>
-                    `
-                },
-                'operational-efficiency': {
-                    title: 'Operational Efficiency',
-                    subtitle: 'Primary Business Outcome',
-                    text: `
-                        <p>Maximizing output while minimizing resource investment through automation, streamlined processes, and intelligent resource allocation.</p>
-                        <p>This outcome requires eliminating manual, repetitive tasks and enabling teams to focus on high-value activities that directly impact revenue.</p>
-                        <p><strong>Key Metrics:</strong> Cost per Lead, Sales Rep Productivity, Time to Quota Attainment, Process Automation Rate</p>
-                    `
-                },
-                'competitive-advantage': {
-                    title: 'Competitive Advantage',
-                    subtitle: 'Primary Business Outcome',
-                    text: `
-                        <p>Building defensible market position through superior processes, deeper customer relationships, and faster response to market opportunities.</p>
-                        <p>This outcome drives the need for market intelligence, relationship leverage, and the ability to engage prospects before competitors.</p>
-                        <p><strong>Key Metrics:</strong> Market Share Growth, Competitive Win Rate, Time to Market Response, Customer Retention vs Competitors</p>
-                    `
-                }
-            };
-            
-            const functionContent = {
-                'lead-generation': {
-                    title: 'Lead Generation',
-                    subtitle: 'Sales & Marketing Function',
-                    text: `
-                        <p>The systematic process of identifying, attracting, and capturing potential customers who show interest in your product or service.</p>
-                        <p>This function requires tools for prospect identification, engagement tracking, and qualification to ensure only high-quality leads enter the sales pipeline.</p>
-                        <p><strong>Core Activities:</strong> Prospect Research, Content Marketing, Social Selling, Lead Scoring, Initial Qualification</p>
-                    `
-                },
-                'sales-development': {
-                    title: 'Sales Development',
-                    subtitle: 'Sales & Marketing Function',
-                    text: `
-                        <p>The bridge between marketing and sales, focused on qualifying leads and setting appointments for account executives.</p>
-                        <p>This function requires personalization at scale, effective prioritization, and systematic follow-up to maximize conversion rates.</p>
-                        <p><strong>Core Activities:</strong> Lead Qualification, Outbound Prospecting, Meeting Setting, Pipeline Development</p>
-                    `
-                },
-                'account-management': {
-                    title: 'Account Management',
-                    subtitle: 'Sales & Marketing Function',
-                    text: `
-                        <p>Managing existing customer relationships to drive expansion, prevent churn, and maximize customer lifetime value.</p>
-                        <p>This function requires deep relationship intelligence, proactive communication, and the ability to identify growth opportunities within existing accounts.</p>
-                        <p><strong>Core Activities:</strong> Relationship Management, Upselling, Cross-selling, Renewal Management, Customer Success</p>
-                    `
-                },
-                'marketing-ops': {
-                    title: 'Marketing Operations',
-                    subtitle: 'Sales & Marketing Function',
-                    text: `
-                        <p>The engine that enables and amplifies sales activities through data management, campaign execution, and performance analytics.</p>
-                        <p>This function provides the infrastructure and insights that allow sales teams to operate effectively at scale.</p>
-                        <p><strong>Core Activities:</strong> Campaign Management, Data Analytics, Lead Routing, Sales Enablement, Performance Measurement</p>
-                    `
-                }
-            };
-            
-            const jtbdContent = {
-                'personalize-scale': {
-                    title: 'Personalize Outreach at Scale',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>The challenge of maintaining human relevance while achieving machine-like efficiency in outreach activities.</p>
-                        <p>Sales teams need systems that automatically gather and apply contextual information to create messages that feel personally crafted for each recipient.</p>
-                        <p><strong>Success Metrics:</strong> Response Rate, Personalization Score, Time per Outreach, Conversion Rate</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Instant Lead Enrichment, Smart Connection Requests, Post Signal Detection</p>
-                    `
-                },
-                'prioritize-pipeline': {
-                    title: 'Prioritize My Pipeline',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>The daily challenge of deciding which prospects to contact first when managing hundreds of opportunities simultaneously.</p>
-                        <p>Requires intelligent scoring that considers engagement history, buying signals, company characteristics, and timing factors.</p>
-                        <p><strong>Success Metrics:</strong> Pipeline Velocity, Opportunity Score Accuracy, Time to Response, Win Rate by Priority</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Morning Priority Queue, Buying Signal Detection, Real-Time Engagement</p>
-                    `
-                },
-                'leverage-network': {
-                    title: 'Leverage My Network',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>Systematically identifying and activating professional relationships to create warm introduction paths and gather competitive intelligence.</p>
-                        <p>Most sales professionals dramatically underutilize their network potential due to lack of systematic relationship mapping.</p>
-                        <p><strong>Success Metrics:</strong> Warm Introduction Rate, Network Connection Growth, Referral Conversion Rate</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Champion Identification, Social Proof Research</p>
-                    `
-                },
-                'build-relationships': {
-                    title: 'Build Stronger Relationships',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>Developing authentic professional connections that create trust, loyalty, and advocacy over time.</p>
-                        <p>Requires systematic touchpoint management and consistent value delivery that goes beyond immediate sales objectives.</p>
-                        <p><strong>Success Metrics:</strong> Relationship Depth Score, Customer Satisfaction, Referral Rate, Retention Rate</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Prospect Warming, Champion Identification, Event-Based Outreach</p>
-                    `
-                },
-                'time-outreach': {
-                    title: 'Time My Outreach Perfectly',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>Contacting prospects at moments when they're most receptive - when they're actively thinking about relevant challenges or experiencing trigger events.</p>
-                        <p>Perfect timing requires monitoring multiple signal sources and detecting optimal engagement moments before they pass.</p>
-                        <p><strong>Success Metrics:</strong> Response Rate by Timing, Engagement Score, Conversion Rate</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Buying Signal Detection, Post Signal Detection, Event-Based Outreach</p>
-                    `
-                },
-                'conversation-starters': {
-                    title: 'Find Conversation Starters',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>Discovering relevant, timely conversation hooks that transform cold outreach into warm, engaging dialogue.</p>
-                        <p>Requires monitoring multiple data sources to surface contextual opportunities for meaningful engagement.</p>
-                        <p><strong>Success Metrics:</strong> Response Rate, Conversation Quality Score, Engagement Duration</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Post Signal Detection, Event-Based Outreach</p>
-                    `
-                },
-                'scale-outreach': {
-                    title: 'Scale My Outreach',
-                    subtitle: 'Core Jobs-to-be-Done',
-                    text: `
-                        <p>Dramatically increasing outreach volume without sacrificing message quality, compliance, or relationship-building effectiveness.</p>
-                        <p>Requires automating repetitive tasks while preserving human elements that drive conversion.</p>
-                        <p><strong>Success Metrics:</strong> Outreach Volume, Quality Score, Conversion Rate, Compliance Rate</p>
-                        <p><strong>Supporting Micro-Journeys:</strong> Smart Connection Requests, Prospect Warming</p>
-                    `
-                }
-            };
-            
-            const microJourneyContent = {
-                'instant-lead': {
-                    title: 'Instant Lead Enrichment Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> New contact created in HubSpot</p>
-                        <p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn API search → Data enrichment → HubSpot update</p>
-                        <p><strong>Time Saved:</strong> 5-10 minutes per lead</p>
-                        <p><strong>Value Added:</strong> Company info, job title, connections, recent activity automatically populated</p>
-                        <p>Transforms manual research into instant, comprehensive data enrichment that becomes the foundation for all subsequent outreach activities.</p>
-                    `
-                },
-                'smart-connection': {
-                    title: 'Smart Connection Requests Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> Deal moves to "Qualified" stage</p>
-                        <p><strong>Workflow:</strong> HubSpot Trigger → Check LinkedIn status → Generate personalized request → Create HubSpot task</p>
-                        <p><strong>Time Saved:</strong> 3-5 minutes per prospect</p>
-                        <p><strong>Value Added:</strong> Templated messages based on HubSpot data with high acceptance rates</p>
-                        <p>Automatically generates highly personalized LinkedIn connection requests using CRM data and LinkedIn insights.</p>
-                    `
-                },
-                'champion-id': {
-                    title: 'Champion Identification Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> Deal moves to "Proposal" stage</p>
-                        <p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn network analysis → Identify mutual connections → Create introduction requests</p>
-                        <p><strong>Time Saved:</strong> 12-18 minutes per opportunity</p>
-                        <p><strong>Value Added:</strong> Strategic relationship leverage and warm introduction paths</p>
-                        <p>Maps relationship networks to identify internal champions who can advocate for your solution within the prospect's organization.</p>
-                    `
-                },
-                'buying-signals': {
-                    title: 'Buying Signal Detection Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> LinkedIn job change notification</p>
-                        <p><strong>Workflow:</strong> LinkedIn Webhook → Match to HubSpot contacts → Check company transition → Create opportunity → Alert sales rep</p>
-                        <p><strong>Time Saved:</strong> 8-15 minutes per signal</p>
-                        <p><strong>Value Added:</strong> Automatic expansion opportunities from job changes</p>
-                        <p>Monitors LinkedIn for job changes among your network, automatically identifying high-converting expansion opportunities.</p>
-                    `
-                },
-                'priority-queue': {
-                    title: 'Morning Priority Queue Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> Daily at 8 AM</p>
-                        <p><strong>Workflow:</strong> Cron Trigger → Query HubSpot for hot prospects → Check LinkedIn activity → Generate prioritized list → Send notification</p>
-                        <p><strong>Time Saved:</strong> 15-20 minutes daily</p>
-                        <p><strong>Value Added:</strong> AI-powered priority scoring for optimal time allocation</p>
-                        <p>Automatically generates a prioritized task list each morning based on prospect engagement and buying signals.</p>
-                    `
-                },
-                'prospect-warming': {
-                    title: 'Prospect Warming Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> New lead assigned</p>
-                        <p><strong>Workflow:</strong> HubSpot Trigger → LinkedIn profile view → Extract recent activity → Schedule 3-touch sequence → Update timeline</p>
-                        <p><strong>Time Saved:</strong> 7-12 minutes per new lead</p>
-                        <p><strong>Value Added:</strong> Systematic prospect engagement that builds familiarity before direct outreach</p>
-                        <p>Implements a systematic warming strategy that builds recognition and curiosity before any direct sales contact.</p>
-                    `
-                },
-                'event-outreach': {
-                    title: 'Event-Based Outreach Journey',
-                    subtitle: 'HubSpot-LinkedIn Automation',
-                    text: `
-                        <p><strong>Trigger:</strong> LinkedIn event attendance detected</p>
-                        <p><strong>Workflow:</strong> LinkedIn API → Match attendees to HubSpot → Generate event-specific outreach → Schedule follow-up sequence</p>
-                        <p><strong>Time Saved:</strong> 15-25 minutes per event</p>
-                        <p><strong>Value Added:</strong> Contextual event-based messaging with higher response rates</p>
-                        <p>Automates the process of identifying event attendees and creating personalized outreach that references shared experiences.</p>
-                    `
-                }
-            };
-            
-            let contentMap;
-            switch(type) {
-                case 'business':
-                    contentMap = businessContent;
-                    break;
-                case 'function':
-                    contentMap = functionContent;
-                    break;
-                case 'jtbd':
-                    contentMap = jtbdContent;
-                    break;
-                case 'microjourney':
-                    contentMap = microJourneyContent;
-                    break;
-                default:
-                    contentMap = {};
-            }
-            
-            return contentMap[id] || {
-                title: 'Details',
-                subtitle: 'Information',
-                text: '<p>Content for this item is being developed.</p>'
-            };
-        }
     </script>
 </body>
 </html>
