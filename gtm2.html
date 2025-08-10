@@ -56,17 +56,13 @@
             border-radius: 0.5rem;
         }
         .screenshot-placeholder {
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 4 / 3;
             background-color: #1A1A1A;
             border: 2px dashed #333333;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 0.5rem;
-        }
-        .tooltip {
-            position: relative;
-            display: inline-block;
         }
     </style>
 </head>
@@ -85,10 +81,10 @@
     <main class="container mx-auto px-4 py-8 sm:py-16">
 
         <section class="text-center max-w-4xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4">Find Your Next Customer in Today's LinkedIn Feed</h1>
-            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-10"><span class="brand-green">We monitor, analyze, and draft the perfect outreach in real-time.</span></h2>
+            <h2 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight mb-4">LinkedIn Intent<br>Signal Detection</h2>
+            <h3 class="text-2xl sm:text-3xl font-semibold tracking-tight mb-8"><span class="brand-green">Find Your Next Customer in Today's LinkedIn Feed.</span></h3>
             
-            <div class="video-placeholder mb-8">
+            <div class="video-placeholder mb-8 max-w-3xl mx-auto">
                 <div class="text-center">
                     <svg class="h-12 w-12 text-gray-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -97,61 +93,171 @@
                     <p class="text-gray-500 mt-2">Product Video Here</p>
                 </div>
             </div>
+
+            <p class="text-lg sm:text-xl text-gray-300 mb-8">We monitor the posts of your key accounts and prospects, analyze their intent in real-time, and draft the perfect outreach for your approval the moment a potential intent signal is detected.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="bg-brand-green text-black font-bold py-3 px-8 rounded-lg text-lg transition-all transform hover:scale-105">Start Listening to My Buyers</a>
+                <a href="#" class="bg-secondary text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-800 transition-all">See a Live Demo</a>
+            </div>
         </section>
 
-        <section class="py-16 sm:py-24 max-w-5xl mx-auto">
-            <div class="text-center mb-12">
+        <section class="py-16 sm:py-24 max-w-4xl mx-auto">
+            <div class="text-center">
                  <div class="mx-auto mb-4 h-12 w-12 flex items-center justify-center bg-secondary rounded-full">
                     <svg class="h-6 w-6 text-brand-pink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                  </div>
                 <h2 class="text-3xl sm:text-4xl font-bold mb-4">You're Relying on Serendipity.</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-lg text-gray-300">
+                    <p>Your sales team manually scrolling through feeds is a game of chance. By the time they see a relevant post, the window of opportunity has closed.</p>
+                    <p>We believe in systematically 'listening' to your prospects and automatically triggering a personalized engagement based on their own words, in near real-time. It also beats intent signal wholesale purchasing.</p>
+                </div>
             </div>
-            <div class="grid md:grid-cols-2 gap-8 text-lg text-gray-300">
-                <p>Your sales team manually scrolling through feeds is a game of chance. By the time they see a relevant post, the window of opportunity has closed.</p>
-                <p>We believe in systematically 'listening' to your prospects and automatically triggering a personalized engagement based on their own words, in near real-time. It also beats intent signal wholesale purchasing.</p>
+        </section>
+
+        <section class="py-16 sm:py-24 max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-16 items-start">
+                <div class="text-center relative">
+                    <div class="screenshot-placeholder">
+                        <p class="text-gray-500">Screenshot 1</p>
+                    </div>
+                     <div class="absolute top-1/2 -right-8">
+                        <svg width="40" height="40" viewBox="0 0 100 100" class="transform -scale-y-100 rotate-45">
+                           <path d="M 10,50 Q 50,90 90,50" stroke="#14DF99" stroke-width="5" fill="none" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 mt-4 text-lg"><strong>Tooltip 1:</strong> Describes the first step shown in the screenshot.</p>
+                </div>
+                <div class="text-center relative">
+                    <div class="screenshot-placeholder">
+                        <p class="text-gray-500">Screenshot 2</p>
+                    </div>
+                     <div class="absolute top-1/2 -right-8">
+                        <svg width="40" height="40" viewBox="0 0 100 100" class="transform -scale-y-100 rotate-45">
+                           <path d="M 10,50 Q 50,90 90,50" stroke="#14DF99" stroke-width="5" fill="none" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <p class="text-gray-300 mt-4 text-lg"><strong>Tooltip 2:</strong> Explains the second part of the process.</p>
+                </div>
+                <div class="text-center">
+                    <div class="screenshot-placeholder">
+                        <p class="text-gray-500">Screenshot 3</p>
+                    </div>
+                    <p class="text-gray-300 mt-4 text-lg"><strong>Tooltip 3:</strong> Details the final outcome or feature.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="py-16 sm:py-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-4">Our Engine Turns Their Words into Your Pipeline.</h2>
+                <p class="text-gray-300 text-lg">This is how it works, from signal detection to your approved outreach.</p>
+            </div>
+            <div id="animation-container" class="space-y-8 md:space-y-0 md:flex md:items-center md:justify-center md:space-x-4">
+                <div id="step-1" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-turquoise" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18M9 6h6m-6 12h6"/></svg>
+                    <h3 class="font-bold mb-1">Monitor & Capture</h3>
+                    <p class="text-sm text-gray-400">Monitoring posts from your target accounts.</p>
+                </div>
+                <div id="arrow-1" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <div id="step-2" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-lime" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.373 3.373 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                    <h3 class="font-bold mb-1">AI-Powered Analysis</h3>
+                    <p class="text-sm text-gray-400">Analyzing for sentiment, keywords, and brands.</p>
+                </div>
+                <div id="arrow-2" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <div id="step-3" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                     <svg class="h-8 w-8 mx-auto mb-3 text-brand-pink" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="font-bold mb-1">Intelligent Triage</h3>
+                    <p class="text-sm text-gray-400">High-intent signal found!</p>
+                </div>
+                <div id="arrow-3" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <div id="step-4" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                     <svg class="h-8 w-8 mx-auto mb-3 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <h3 class="font-bold mb-1">Draft & Approve</h3>
+                    <p class="text-sm text-gray-400">Draft sent to your review for explicit approval.</p>
+                </div>
+                <div id="arrow-4" class="animation-arrow text-center text-brand-green transform md:-rotate-0">→</div>
+
+                <div id="step-5" class="animation-step bg-secondary p-6 rounded-lg text-center w-full md:w-48">
+                    <svg class="h-8 w-8 mx-auto mb-3 text-brand-turquoise" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <h3 class="font-bold mb-1">Execute Engagement</h3>
+                    <p class="text-sm text-gray-400">Approved outreach sent and logged in CRM.</p>
+                </div>
             </div>
         </section>
 
         <section class="py-16 sm:py-24">
             <div class="text-center max-w-3xl mx-auto mb-12">
-                <h2 class="text-3xl sm:text-4xl font-bold mb-4">From Signal to Approved Outreach</h2>
-                <p class="text-gray-300 text-lg">See our engine in action. We turn their words into your pipeline.</p>
+                <h2 class="text-3xl sm:text-4xl font-bold">The Envy Advantage</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-                <div class="text-center">
-                    <div class="screenshot-placeholder mb-4">
-                        <p class="text-gray-500">Screenshot 1</p>
-                    </div>
-                    <div class="tooltip">
-                        <svg class="h-8 w-8 text-brand-green mx-auto transform -rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                        </svg>
-                        <p class="text-gray-400 mt-2"><strong>Step 1: Monitor & Capture</strong><br>We monitor posts from your target accounts.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Engage on Authentic Intent</h3>
+                            <p class="text-gray-400">Move beyond generic intent data. Act on the actual, public words of your prospects and customers.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <div class="screenshot-placeholder mb-4">
-                        <p class="text-gray-500">Screenshot 2</p>
-                    </div>
-                    <div class="tooltip">
-                        <svg class="h-8 w-8 text-brand-green mx-auto transform -rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                        </svg>
-                        <p class="text-gray-400 mt-2"><strong>Step 2: AI-Powered Analysis</strong><br>We analyze for sentiment, keywords, and brands.</p>
+                <div class="bg-secondary p-8 rounded-lg">
+                     <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Hyper-Personalization at Scale</h3>
+                            <p class="text-gray-400">Our engine drafts the outreach; your team adds the final human touch.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="text-center">
-                    <div class="screenshot-placeholder mb-4">
-                        <p class="text-gray-500">Screenshot 3</p>
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Uncover Hidden Opportunities</h3>
+                            <p class="text-gray-400">Find pipeline in accounts that aren't actively searching on Google or G2. Find opportunities your competitors will never see.</p>
+                        </div>
                     </div>
-                    <div class="tooltip">
-                       <svg class="h-8 w-8 text-brand-green mx-auto transform -rotate-45" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-                        </svg>
-                        <p class="text-gray-400 mt-2"><strong>Step 3: Draft & Approve</strong><br>A draft is sent for your explicit approval.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-lg">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 h-10 w-10 flex items-center justify-center bg-black rounded-full mr-4"><svg class="h-6 w-6 brand-green" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg></div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Brand Safe & Human-Approved</h3>
+                            <p class="text-gray-400">Every single piece of outreach is sent to a dashboard for your review and approval. You have full control.</p>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 sm:py-24">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-3xl sm:text-4xl font-bold">Built with a Minimalistically Powerful Stack</h2>
+                <p class="text-gray-300 text-lg">We build these engines by expertly integrating best-in-class tools. You get a flexible, powerful solution without being locked into a proprietary black box.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <img src="https://raw.githubusercontent.com/n8n-io/n8n-docs/master/assets/n8n-logo-square.png" alt="n8n Logo" class="h-16 w-16 mx-auto mb-4 rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/64x64/1F2937/F9FAFB?text=n8n';">
+                    <h3 class="text-xl font-bold">n8n</h3>
+                    <p class="font-semibold text-brand-green mb-2">Orchestration</p>
+                    <p class="text-gray-400">We use n8n to build the core workflow, providing a robust and customizable automation.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                    <img src="https://www.unipile.com/wp-content/uploads/2023/08/logo-unipile.png" alt="Unipile Logo" class="h-16 w-16 mx-auto mb-4 p-2 bg-white rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/111827?text=Unipile';">
+                    <h3 class="text-xl font-bold">Unipile</h3>
+                    <p class="font-semibold text-brand-green mb-2">LinkedIn Interactivity</p>
+                    <p class="text-gray-400">We leverage the Unipile API to reliably access LinkedIn data and perform actions.</p>
+                </div>
+                <div class="bg-secondary p-8 rounded-lg text-center">
+                     <img src="https://cdn.worldvectorlogo.com/logos/hubspot.svg" alt="HubSpot Logo" class="h-16 w-16 mx-auto mb-4" onerror="this.onerror=null;this.src='https://placehold.co/64x64/1F2937/F9FAFB?text=HubSpot';">
+                    <h3 class="text-xl font-bold">HubSpot</h3>
+                    <p class="font-semibold text-brand-green mb-2">CRM & Reporting</p>
+                    <p class="text-gray-400">The entire play is rooted in HubSpot for target lists, activity logging, and ROI reporting. The loop is closed.</p>
                 </div>
             </div>
         </section>
@@ -174,6 +280,42 @@
             <p>&copy; 2025 GoEnvy. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // This script handles the animation for the "Solution" section
+        document.addEventListener('DOMContentLoaded', () => {
+            const animationContainer = document.getElementById('animation-container');
+            const steps = Array.from(animationContainer.querySelectorAll('.animation-step'));
+            const arrows = Array.from(animationContainer.querySelectorAll('.animation-arrow'));
+
+            const allElements = [];
+            steps.forEach((step, index) => {
+                allElements.push(step);
+                if (arrows[index]) {
+                    allElements.push(arrows[index]);
+                }
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    // Start the animation sequence when the container is in view
+                    let delay = 0;
+                    allElements.forEach((el) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, delay);
+                        delay += 400; // Stagger the animation for each element
+                    });
+                    // We only want this to run once, so we disconnect the observer
+                    observer.disconnect();
+                }
+            }, {
+                threshold: 0.5 // Trigger when 50% of the container is visible
+            });
+
+            observer.observe(animationContainer);
+        });
+    </script>
 
     <script src="../assets/js/common.js"></script>
 
